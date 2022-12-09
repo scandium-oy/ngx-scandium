@@ -3,5 +3,36 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
+    "ngx-scandium": {
+      "projectType": "library",
+      "root": "projects/ngx-scandium",
+      "sourceRoot": "projects/ngx-scandium/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/ngx-scandium/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ngx-scandium/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/ngx-scandium/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ngx-scandium/src/test.ts",
+            "tsConfig": "projects/ngx-scandium/tsconfig.spec.json",
+            "karmaConfig": "projects/ngx-scandium/karma.conf.js"
+          }
+        }
+      }
+    }
   }
 }

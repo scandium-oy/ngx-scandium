@@ -1,0 +1,14 @@
+{
+  "name": "ngx-scandium",
+  "version": "0.0.1",
+  "author": {
+    "name": "Scandium"
+  },
+  "peerDependencies": {
+    "@angular/common": "^14.1.0",
+    "@angular/core": "^14.1.0"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  }
+}
