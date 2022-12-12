@@ -63,15 +63,12 @@ export class AuthService {
     return sendPasswordResetEmail(this.auth, email);
   }
 
-  public signOut() {
-    return this.auth.signOut().then(() => {
-      this.navigationService.navigateToLogin();
-    });
+  public async signOut() {
+    await this.auth.signOut();
+    this.navigationService.navigateToLogin();
   }
 
   public deleteUser() {
-    return this.auth.currentUser?.delete().then(() => {
-      this.navigationService.navigateToLogin();
-    });
+    return this.auth.currentUser?.delete().then(() => this.navigationService.navigateToLogin());
   }
 }

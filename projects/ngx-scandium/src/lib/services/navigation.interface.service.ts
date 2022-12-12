@@ -1,15 +1,17 @@
+import { Injectable } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
-import { filter, map } from 'rxjs';
+import { filter, map } from 'rxjs/operators';
 
+@Injectable()
 export abstract class INavigationService {
 
-  selected$ = this.router.events.pipe(
+  public selected$ = this.router.events.pipe(
     filter((e) => e instanceof NavigationEnd),
     map((_e) => this.router.url.replace('/', '')),
   );
 
   constructor(
-    private router: Router,
+    protected router: Router,
   ) { }
 
   public abstract navigateToHome(): Promise<boolean>;
