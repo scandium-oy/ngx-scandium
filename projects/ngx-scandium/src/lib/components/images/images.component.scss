@@ -1,0 +1,12 @@
+img.img {
+  max-height: 200px;
+  object-fit: contain;
+  border: 1px solid var(--border-color, #222);
+  cursor: pointer;
+}
+
+.images {
+  display: flex;
+  gap: 0.5em;
+  margin-top: 2em;
+}

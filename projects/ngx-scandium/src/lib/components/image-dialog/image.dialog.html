@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="dismiss()">
+        <ion-icon name="close-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div class="flex">
+    <swiper [pagination]="true">
+      <ng-template swiperSlide
+        *ngFor="let imageUrl of imageUrls">
+        <img [src]="imageUrl" />
+      </ng-template>
+    </swiper>
+  </div>
+</ion-content>

@@ -1,0 +1,46 @@
+{
+  "files.watcherExclude": {
+    "**/node_modules/**": true,
+    "**/dist/**": true,
+  },
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/dist": true,
+  },
+  "editor.detectIndentation": false,
+  "editor.formatOnType": false,
+  "editor.formatOnSave": true,
+  "editor.insertSpaces": true,
+  "editor.renderWhitespace": "none",
+  "editor.tabCompletion": "on",
+  "editor.tabSize": 2,
+  "editor.wordWrap": "off",
+  "editor.codeActionsOnSave": {
+    "source.fixAll": true,
+  },
+  "files.eol": "\n",
+  "files.encoding": "utf8",
+  "files.trimTrailingWhitespace": true,
+  "[typescript]": {
+    "editor.formatOnPaste": true,
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": true,
+      "source.fixAll.eslint": true,
+    },
+    "files.insertFinalNewline": true,
+  },
+  "[html]": {
+    "editor.defaultFormatter": "vscode.html-language-features"
+  },
+  "html.format.wrapAttributes": "force",
+  "html.format.preserveNewLines": true,
+  "html.format.maxPreserveNewLines": 1,
+  "html.format.wrapLineLength": 120,
+  "html.suggest.html5": true,
+  "[scss]": {
+    "editor.codeActionsOnSave": {
+      "source.fixAll.stylelint": true,
+    },
+  },
+  "typescript.tsdk": "node_modules\\typescript\\lib",
+}

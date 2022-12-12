@@ -1,0 +1,7 @@
+<div class="images">
+  <div *ngFor="let image of images">
+    <img class="img link"
+      (click)="openImage(image)"
+      [src]="image" />
+  </div>
+</div>
