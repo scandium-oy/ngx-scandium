@@ -1,6 +1,6 @@
 {
   "name": "ngx-scandium",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "author": {
     "name": "Scandium"
   },
@@ -8,9 +8,10 @@
     "@angular/common": ">=15.0.0",
     "@angular/core": ">=15.0.0",
     "@angular/fire": "~7.5.0",
+    "@angular/router": ">=15.0.0",
     "@ngx-translate/core": ">=14.0.0",
     "@ngx-translate/http-loader": ">=7.0.0",
-    "rxjs": "~6.6.0"
+    "rxjs": "~6.6.0 | ~7.5.0"
   },
   "dependencies": {
     "tslib": "^2.3.0"
