@@ -7,3 +7,9 @@ export * from './lib/directives/format-number/format-number.module';
 
 export * from './lib/directives/round-number/round-number.directive';
 export * from './lib/directives/round-number/round-number.module';
+
+export * from './lib/models';
+
+export * from './lib/services/firestore.service';
+
+export * from './lib/utility';
