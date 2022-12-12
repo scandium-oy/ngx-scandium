@@ -11,6 +11,7 @@ export * from './lib/directives/round-number/round-number.module';
 export * from './lib/models';
 
 export * from './lib/services/auth.service';
+export * from './lib/services/camera.service';
 export * from './lib/services/firestore.service';
 export * from './lib/services/navigation.interface.service';
 
