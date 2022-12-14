@@ -1,6 +1,6 @@
 {
-  "name": "ngx-scandium",
-  "version": "0.0.15",
+  "name": "@scandium-oy/ngx-scandium",
+  "version": "0.0.1",
   "author": {
     "name": "Scandium"
   },
