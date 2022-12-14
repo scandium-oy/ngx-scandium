@@ -1,0 +1,13 @@
+:host {
+  display: block;
+}
+
+.client-logo-container {
+  width: 50px;
+}
+
+.client-logo {
+  max-width: 50px;
+  max-height: 100px;
+  object-fit: contain;
+}
