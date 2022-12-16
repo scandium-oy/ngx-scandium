@@ -3,6 +3,7 @@ import {
   Auth,
   AuthCredential,
   AuthProvider, createUserWithEmailAndPassword, EmailAuthProvider,
+  fetchSignInMethodsForEmail,
   sendPasswordResetEmail,
   signInWithCredential, signInWithPopup, updatePassword, updateProfile, user, User, UserCredential
 } from '@angular/fire/auth';
@@ -45,6 +46,10 @@ export class AuthService {
     );
     const userCredential = await this.signInWithCredential(credential);
     return updatePassword(userCredential.user, newPassword);
+  }
+
+  public getSignInMethodsForEmail(email: string) {
+    return fetchSignInMethodsForEmail(this.auth, email);
   }
 
   public signInWithCredential(credential: AuthCredential): Promise<UserCredential> {
