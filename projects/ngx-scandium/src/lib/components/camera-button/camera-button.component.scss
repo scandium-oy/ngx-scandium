@@ -1,3 +1,7 @@
 :host {
   display: block;
+
+  ion-button {
+    height: var(--camera-button-height, 36px);
+  }
 }
