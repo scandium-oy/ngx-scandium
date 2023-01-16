@@ -20,6 +20,9 @@ export class CameraButtonComponent {
   @Input()
   expand = 'block';
 
+  @Input()
+  shape: string = '';
+
   @Output()
   imageUrl: EventEmitter<string> = new EventEmitter();
 
