@@ -2,7 +2,18 @@
   [expand]="expand"
   [shape]="shape"
   (click)="onCamera()">
-  <ion-icon slot="start"
-    name="camera-outline"></ion-icon>
-  {{ 'item.addImage' | translate }}
+  <div *ngIf="multiline else sameLineTemplate"
+    class="multiline">
+    <ion-icon name="camera-outline"></ion-icon>
+    <span *ngIf="!hideText">
+      {{ 'item.addImage' | translate }}
+    </span>
+  </div>
+  <ng-template #sameLineTemplate>
+    <ion-icon slot="start"
+      name="camera-outline"></ion-icon>
+    <span *ngIf="!hideText">
+      {{ 'item.addImage' | translate }}
+    </span>
+  </ng-template>
 </ion-button>

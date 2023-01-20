@@ -23,6 +23,12 @@ export class CameraButtonComponent {
   @Input()
   shape: string = '';
 
+  @Input()
+  multiline = false;
+
+  @Input()
+  hideText = false;
+
   @Output()
   imageUrl: EventEmitter<string> = new EventEmitter();
 
