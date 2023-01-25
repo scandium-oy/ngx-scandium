@@ -12,6 +12,9 @@ import { UploadService } from '../../services/upload.service';
 export class CameraButtonComponent {
 
   @Input()
+  color = 'primary';
+
+  @Input()
   name: string = '';
 
   @Input()

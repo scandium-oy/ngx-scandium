@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
+import { CameraButtonModule } from '../camera-button/camera-button.module';
 import { ImageDialogModule } from '../image-dialog/image-dialog.module';
 import { ImagesComponent } from './images.component';
 
@@ -10,6 +11,7 @@ import { ImagesComponent } from './images.component';
     CommonModule,
     IonicModule,
     ImageDialogModule,
+    CameraButtonModule,
   ],
   exports: [ImagesComponent],
 })

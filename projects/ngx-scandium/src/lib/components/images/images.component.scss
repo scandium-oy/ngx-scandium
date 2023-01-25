@@ -1,12 +1,41 @@
 img.img {
   max-height: 200px;
   object-fit: contain;
-  border: 1px solid var(--border-color, #222);
   cursor: pointer;
+  border-radius: var(--app-card-radius);
+
+  @media screen and (max-width: 767px) {
+    max-height: none;
+    width: 100%;
+  }
 }
 
 .images {
   display: flex;
   gap: 0.5em;
-  margin-top: 2em;
+  margin-top: 1em;
+  align-items: flex-end;
+}
+
+.delete {
+  display: none;
+}
+
+.container:hover {
+  .delete {
+    display: block;
+  }
+}
+
+.smalls {
+  img {
+    max-height: 50px;
+    border-radius: 0.3em;
+  }
+
+  app-camera-button {
+    --camera-button-height: 50px;
+    --camera-color: #fff;
+    --camera-border: none;
+  }
 }
