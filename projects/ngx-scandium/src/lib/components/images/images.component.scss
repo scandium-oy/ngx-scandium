@@ -1,7 +1,6 @@
 img.img {
   max-height: 200px;
   object-fit: contain;
-  cursor: pointer;
   border-radius: var(--app-card-radius);
 
   @media screen and (max-width: 767px) {
@@ -31,6 +30,7 @@ img.img {
   img {
     max-height: 50px;
     border-radius: 0.3em;
+    object-fit: contain;
   }
 
   app-camera-button {
