@@ -18,6 +18,8 @@ export * from './lib/directives/round-number/round-number.directive';
 export * from './lib/directives/round-number/round-number.module';
 export * from './lib/interceptors/http.interceptor';
 export * from './lib/models';
+export * from './lib/pipes/postalCode/postal-code.module';
+export * from './lib/pipes/postalCode/postal-code.pipe';
 export * from './lib/services/app-update.service';
 export * from './lib/services/auth.service';
 export * from './lib/services/camera.service';
