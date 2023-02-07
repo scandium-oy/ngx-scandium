@@ -7,14 +7,14 @@
     class="multiline">
     <ion-icon name="camera-outline"></ion-icon>
     <span *ngIf="!hideText">
-      {{ 'item.addImage' | translate }}
+      {{ title | translate }}
     </span>
   </div>
   <ng-template #sameLineTemplate>
     <ion-icon slot="start"
       name="camera-outline"></ion-icon>
     <span *ngIf="!hideText">
-      {{ 'item.addImage' | translate }}
+      {{ title | translate }}
     </span>
   </ng-template>
 </ion-button>

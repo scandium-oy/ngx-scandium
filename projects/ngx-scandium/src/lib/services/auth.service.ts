@@ -70,7 +70,7 @@ export class AuthService {
 
   public async signOut() {
     await this.auth.signOut();
-    this.navigationService.navigateToLogin();
+    // this.navigationService.navigateToLogin();
   }
 
   public deleteUser() {

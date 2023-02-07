@@ -18,6 +18,9 @@ export class CameraButtonComponent {
   name: string = '';
 
   @Input()
+  title: string = 'item.addImage';
+
+  @Input()
   fill = 'outline';
 
   @Input()
