@@ -25,10 +25,20 @@
       [multiline]="true"
       (imageUrl)="onImageUrl($event)"></app-camera-button>
   </div>
-  <div *ngFor="let image of images"
-    class="smalls">
-    <img class="link"
-      (click)="toMain(image)"
-      [src]="image" />
-  </div>
+  <ng-container *ngIf="thumbs.length > 0 else imagesTemplate">
+    <div *ngFor="let image of thumbs"
+      class="smalls">
+      <img class="link"
+        (click)="toMain(image.img)"
+        [src]="image.thumb" />
+    </div>
+  </ng-container>
+  <ng-template #imagesTemplate>
+    <div *ngFor="let image of images"
+      class="smalls">
+      <img class="link"
+        (click)="toMain(image)"
+        [src]="image" />
+    </div>
+  </ng-template>
 </div>

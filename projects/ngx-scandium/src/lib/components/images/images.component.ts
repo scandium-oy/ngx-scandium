@@ -23,6 +23,12 @@ export class ImagesComponent implements OnChanges {
   @Input()
   canDelete: boolean = false;
 
+  @Input()
+  thumbs: {
+    img: string;
+    thumb: string;
+  }[] = [];
+
   @Output()
   onDelete = new EventEmitter<string>();
 
