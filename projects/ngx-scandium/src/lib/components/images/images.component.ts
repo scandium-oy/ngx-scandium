@@ -58,6 +58,12 @@ export class ImagesComponent implements OnChanges {
         this.mainImage = images[0];
       }
     }
+    if (changes['thumbs']) {
+      const images = changes['thumbs'].currentValue;
+      if (images?.length > 0) {
+        this.mainImage = images[0].img;
+      }
+    }
   }
 
   onImageUrl(imageUrl: string) {

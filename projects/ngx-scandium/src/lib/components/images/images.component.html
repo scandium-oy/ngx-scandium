@@ -15,7 +15,7 @@
     </ion-note>
   </div>
 </div>
-<div *ngIf="showCamera || (images && images.length > 1)"
+<div *ngIf="showCamera || (images && images.length > 1) || (thumbs && thumbs.length > 1)"
   class="images">
   <div *ngIf="showCamera != null && mainImage != null"
     class="smalls">
@@ -25,7 +25,7 @@
       [multiline]="true"
       (imageUrl)="onImageUrl($event)"></app-camera-button>
   </div>
-  <ng-container *ngIf="thumbs.length > 0 else imagesTemplate">
+  <ng-container *ngIf="thumbs && thumbs.length > 0 else imagesTemplate">
     <div *ngFor="let image of thumbs"
       class="smalls">
       <img class="link"
