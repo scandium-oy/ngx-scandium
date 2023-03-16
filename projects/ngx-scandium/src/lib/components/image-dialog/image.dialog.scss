@@ -1,5 +1,26 @@
+ion-content {
+  --background: transparent;
+}
+
+swiper {
+  height: 100%;
+
+  img {
+    border-radius: var(--app-card-radius, 1em);
+  }
+}
+
 .flex {
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 100%;
+}
+
+ion-footer {
+  margin-bottom: 1em;
+
+  ion-button {
+    font-size: 2em;
+  }
 }

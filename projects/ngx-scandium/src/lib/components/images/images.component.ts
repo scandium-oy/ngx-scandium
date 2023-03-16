@@ -78,7 +78,7 @@ export class ImagesComponent implements OnChanges {
     this.modalCtrl.create({
       component: ImageDialogComponent,
       componentProps: { image, images: this.images },
-      cssClass: 'modal-fullscreen',
+      cssClass: ['modal-fullscreen', 'transparent-modal'],
     }).then((modal) => {
       modal.present();
     })
