@@ -12,7 +12,8 @@ export class TokenInterceptor implements HttpInterceptor {
   ) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    if (req.url.includes('/assets/i18n') || req.url.includes('avoindata.prh.fi')) {
+    if (req.url.includes('/assets/i18n')
+      || req.url.includes('avoindata.prh.fi')) {
       return next.handle(req);
     }
     return this.authService.getUser().pipe(
