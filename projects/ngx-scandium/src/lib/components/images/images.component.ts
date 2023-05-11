@@ -18,6 +18,9 @@ export class ImagesComponent implements OnChanges {
   images: string[] = [];
 
   @Input()
+  videos: string[] = [];
+
+  @Input()
   showDetails: boolean = false;
 
   @Input()
@@ -35,7 +38,7 @@ export class ImagesComponent implements OnChanges {
   @Output()
   onCamera = new EventEmitter<string>();
 
-  mainImage: string = '';
+  mainImage: { url: string; type: 'image' | 'video' } | null = null;
 
   getDetails = memo((image: string) => this._getDetails(image));
 
@@ -55,13 +58,19 @@ export class ImagesComponent implements OnChanges {
     if (changes['images']) {
       const images = changes['images'].currentValue;
       if (images?.length > 0) {
-        this.mainImage = images[0];
+        this.mainImage = { url: images[0], type: 'image' };
       }
     }
     if (changes['thumbs']) {
       const images = changes['thumbs'].currentValue;
       if (images?.length > 0) {
-        this.mainImage = images[0].img;
+        this.mainImage = { url: images[0].img, type: 'image' };
+      }
+    }
+    if (changes['videos']) {
+      const videos = changes['videos'].currentValue;
+      if (videos?.length > 0) {
+        this.mainImage = { url: videos[0], type: 'video' };
       }
     }
   }
@@ -70,8 +79,8 @@ export class ImagesComponent implements OnChanges {
     this.onCamera.emit(imageUrl);
   }
 
-  toMain(image: string) {
-    this.mainImage = image;
+  toMain(url: string, type: 'image' | 'video') {
+    this.mainImage = { url, type };
   }
 
   openImage(image: string) {

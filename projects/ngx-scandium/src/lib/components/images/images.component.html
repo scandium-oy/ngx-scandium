@@ -1,21 +1,36 @@
 <div *ngIf="mainImage"
   class="container">
-  <img class="img link"
-    (click)="openImage(mainImage)"
-    [src]="mainImage" />
-  <div *ngIf="canDelete"
-    class="delete link">
-    <ion-icon name="remove-circle-outline"
-      color="danger"
-      (click)="delete(mainImage)"></ion-icon>
-  </div>
+  <ng-container *ngIf="mainImage.type === 'image'">
+    <img class="img link"
+      (click)="openImage(mainImage.url)"
+      [src]="mainImage.url" />
+    <div *ngIf="canDelete"
+      class="delete link">
+      <ion-icon name="remove-circle-outline"
+        color="danger"
+        (click)="delete(mainImage.url)"></ion-icon>
+    </div>
+    <div>
+      <ion-note *ngIf="showDetails">
+        {{ getDetails(mainImage.url) }}
+      </ion-note>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="mainImage.type === 'video'">
+    <video controls
+      preload="metadata">
+      <source [src]="mainImage.url + '#t=0.5'"
+        type="video/mp4">
+    </video>
+  </ng-container>
   <div>
     <ion-note *ngIf="showDetails">
       {{ getDetails(mainImage) }}
     </ion-note>
   </div>
 </div>
-<div *ngIf="showCamera || (images && images.length > 1) || (thumbs && thumbs.length > 1)"
+<div
+  *ngIf="showCamera || (images && images.length > 1) || (thumbs && thumbs.length > 1) || (videos && videos.length > 1)"
   class="images">
   <div *ngIf="showCamera != null && mainImage != null"
     class="smalls">
@@ -29,7 +44,7 @@
     <div *ngFor="let image of thumbs"
       class="smalls">
       <img class="link"
-        (click)="toMain(image.img)"
+        (click)="toMain(image.img, 'image')"
         [src]="image.thumb" />
     </div>
   </ng-container>
@@ -37,8 +52,17 @@
     <div *ngFor="let image of images"
       class="smalls">
       <img class="link"
-        (click)="toMain(image)"
+        (click)="toMain(image, 'image')"
         [src]="image" />
+    </div>
+    <div *ngFor="let video of videos"
+      class="smalls">
+      <video class="link"
+        preload="metadata"
+        (click)="toMain(video, 'video')">
+        <source [src]="video + '#t=0.5'"
+          type="video/mp4">
+      </video>
     </div>
   </ng-template>
 </div>

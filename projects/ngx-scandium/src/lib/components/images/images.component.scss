@@ -9,6 +9,17 @@ img.img {
   }
 }
 
+video {
+  max-height: 200px;
+  object-fit: contain;
+  border-radius: var(--app-card-radius);
+
+  @media screen and (max-width: 767px) {
+    max-height: none;
+    width: 100%;
+  }
+}
+
 .images {
   display: flex;
   gap: 0.5em;
