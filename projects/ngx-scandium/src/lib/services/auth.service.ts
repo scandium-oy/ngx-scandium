@@ -60,6 +60,10 @@ export class AuthService {
     return signInWithPopup(this.auth, provider);
   }
 
+  public checkIfEmailExists(email: string) {
+    return fetchSignInMethodsForEmail(this.auth, email).then((methods) => methods.length > 0);
+  }
+
   public registerWithEmail(email: string, password: string) {
     return createUserWithEmailAndPassword(this.auth, email, password);
   }
