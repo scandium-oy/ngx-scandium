@@ -5,8 +5,8 @@ import {
   query, QueryConstraint, setDoc, updateDoc
 } from '@angular/fire/firestore';
 import { getDownloadURL, ref, Storage, uploadBytes } from '@angular/fire/storage';
-import { concat, from, Observable, of, throwError } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { from, Observable, of } from 'rxjs';
+import { catchError, map, tap } from 'rxjs/operators';
 import { FileUpload, FirestoreItem } from '../models';
 import { fieldSorter } from '../utility';
 
@@ -56,7 +56,7 @@ export class FirestoreService {
   ): Observable<T | null> {
     const docRef = doc(this.firestore, collectionKey, guid).withConverter(converter);
     return docData(docRef, { idField: 'guid' }).pipe(
-      catchError((err) => concat(of(null), throwError(err))),
+      catchError((_err) => of(null).pipe(tap((_) => console.log(`${collectionKey} fetch error`)))),
       map((item) => {
         if (item) {
           item['guid'] = guid;
@@ -75,8 +75,9 @@ export class FirestoreService {
   ): Observable<T | null> {
     const docRef = doc(this.firestore, collectionKey, guid).withConverter(converter);
     return from(getDoc(docRef)).pipe(
+      catchError((_err) => of(null).pipe(tap((_) => console.log(`${collectionKey} fetch error`)))),
       map((ret) => {
-        const item = ret.data();
+        const item = ret?.data();
         if (item) {
           item['guid'] = guid;
           return item as T;
@@ -96,7 +97,7 @@ export class FirestoreService {
     const collectionRef = collection(this.firestore, collectionKey).withConverter(converter);
     const q = query(collectionRef, ...queryConstraints);
     return collectionData(q, { idField: 'guid' }).pipe(
-      catchError((err) => concat(of(null), throwError(err))),
+      catchError((_err) => of(null).pipe(tap((_) => console.log(`${collectionKey} fetch error`)))),
       map((items) => {
         if (orderBy) {
           items = items?.sort(fieldSorter([orderBy.value])) ?? null;
@@ -126,7 +127,9 @@ export class FirestoreService {
         }
       }
       return items?.map((item: any) => item as T) ?? [];
-    }));
+    })).pipe(
+      catchError((_err) => of([]).pipe(tap((_) => console.log(`${collectionKey} fetch error`)))),
+    );
   }
 
   async pushFileToStorage(fileUpload: FileUpload, path: string): Promise<string> {
