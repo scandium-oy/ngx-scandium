@@ -1,6 +1,6 @@
 {
   "name": "@scandium-oy/ngx-scandium",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "author": {
     "name": "Scandium"
   },
@@ -14,7 +14,7 @@
     "@capacitor/dialog": ">=4.1.0",
     "@capacitor/filesystem": ">=4.1.3",
     "@ionic/angular": ">=6.4.0",
-    "@ionic/storage-angular": "^3.0.6",
+    "@ionic/storage-angular": "^4.0.0",
     "@ngx-translate/core": ">=14.0.0",
     "@ngx-translate/http-loader": ">=7.0.0",
     "base64-arraybuffer": "~1.0.0",
