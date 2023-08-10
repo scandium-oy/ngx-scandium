@@ -15,6 +15,9 @@ export class ImagesComponent implements OnChanges {
   showCamera: string = '';
 
   @Input()
+  showVideo: boolean = false;
+
+  @Input()
   images: string[] = [];
 
   @Input()

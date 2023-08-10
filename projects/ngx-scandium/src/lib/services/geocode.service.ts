@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { ILocation } from '../models/location.model';
 
-const host = 'https://nominatim.openstreetmap.org';
+export const mapHost = 'https://nominatim.openstreetmap.org';
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +13,7 @@ export class GeocodeService {
   constructor(private http: HttpClient) { }
 
   getGeocode(address: string, postalCode: string): Observable<ILocation | null> {
-    return this.http.get<any[]>(`${host}/search?q=${address}+${postalCode}&format=json`)
+    return this.http.get<any[]>(`${mapHost}/search?q=${address}+${postalCode}&format=json`)
       .pipe(
         map((response) => {
           if (response.length > 0) {

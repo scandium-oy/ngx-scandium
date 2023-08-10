@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, from } from 'rxjs';
 import { filter, switchMap } from 'rxjs/operators';
 import { AuthService } from '../services/auth.service';
+import { mapHost } from '../services/geocode.service';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
@@ -14,7 +15,8 @@ export class TokenInterceptor implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     if (req.url.includes('/assets/i18n')
       || req.url.includes('avoindata.prh.fi')
-      || req.url.includes('/api/contractors/')) {
+      || req.url.includes('/api/contractors/')
+      || req.url.startsWith(mapHost)) {
       return next.handle(req);
     }
     return this.authService.getUser().pipe(
