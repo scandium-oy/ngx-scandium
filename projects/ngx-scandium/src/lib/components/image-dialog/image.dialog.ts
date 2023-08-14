@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { CUSTOM_ELEMENTS_SCHEMA, Component } from '@angular/core';
 import { IonicModule, IonicSlides, ModalController, NavParams } from '@ionic/angular';
+import { Zoom } from 'swiper/modules';
 
 @Component({
   standalone: true,
@@ -15,7 +16,7 @@ import { IonicModule, IonicSlides, ModalController, NavParams } from '@ionic/ang
 })
 export class ImageDialogComponent {
 
-  swiperModules = [IonicSlides];
+  swiperModules = [Zoom, IonicSlides];
   imageUrls: string[];
 
   constructor(
