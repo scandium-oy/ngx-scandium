@@ -1,15 +1,12 @@
 <ion-content>
-  <div class="flex">
-    <swiper #swiper
-      [config]="config">
-      <ng-template swiperSlide
-        *ngFor="let imageUrl of imageUrls">
-        <div class="swiper-zoom-container">
-          <img [src]="imageUrl" />
-        </div>
-      </ng-template>
-    </swiper>
-  </div>
+  <swiper-container [scrollbar]="true"
+    [zoom]="true">
+    <swiper-slide *ngFor="let imageUrl of imageUrls">
+      <div class="swiper-zoom-container">
+        <img [src]="imageUrl" />
+      </div>
+    </swiper-slide>
+  </swiper-container>
 </ion-content>
 <ion-footer class="ion-no-border">
   <ion-row>

@@ -2,10 +2,12 @@ ion-content {
   --background: transparent;
 }
 
-swiper {
+swiper-container {
   height: 100%;
 
   img {
+    max-height: 100%;
+    object-fit: contain;
     border-radius: var(--app-card-radius, 1em);
   }
 }
