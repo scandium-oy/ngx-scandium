@@ -1,6 +1,8 @@
 <ion-content>
-  <swiper-container [scrollbar]="true"
-    [zoom]="true"
+  <swiper-container navigation="true"
+    pagination="true"
+    pagination-clickable="true"
+    zoom="true"
     [modules]="swiperModules">
     <swiper-slide *ngFor="let imageUrl of imageUrls">
       <div class="swiper-zoom-container">
