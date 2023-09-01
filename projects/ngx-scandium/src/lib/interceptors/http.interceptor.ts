@@ -15,7 +15,7 @@ export class TokenInterceptor implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     if (req.url.includes('/assets/i18n')
       || req.url.includes('avoindata.prh.fi')
-      || req.url.includes('/api/contractors/')
+      || (req.url.includes('/api/contractors/') && req.method === 'GET')
       || req.url.startsWith(mapHost)) {
       return next.handle(req);
     }
