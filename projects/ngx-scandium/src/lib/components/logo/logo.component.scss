@@ -3,11 +3,11 @@
 }
 
 .client-logo-container {
-  width: 50px;
+  width: var(--app-logo-width, 50px);
 }
 
 .client-logo {
-  max-width: 50px;
-  max-height: 100px;
+  max-width: var(--app-logo-width, 50px);
+  max-height: var(--app-logo-height, 100px);
   object-fit: contain;
 }
