@@ -32,10 +32,14 @@ export class CameraService {
         path: photo.path
       });
 
-      const blob = new Blob([new Uint8Array(decode(file.data))], {
-        type: `image/${photo.format}`,
-      });
-      return blob;
+      if (typeof file.data === 'string') {
+        const blob = new Blob([new Uint8Array(decode(file.data))], {
+          type: `image/${photo.format}`,
+        });
+        return blob;
+      } else {
+        return file.data;
+      }
     }
     else {
       if (photo.webPath == null) {
