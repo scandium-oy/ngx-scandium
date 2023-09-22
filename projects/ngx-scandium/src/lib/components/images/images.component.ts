@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, signal } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { memo } from '../../utility';
 import { ImageDialogComponent } from '../image-dialog/image.dialog';
@@ -41,7 +41,7 @@ export class ImagesComponent implements OnChanges {
   @Output()
   onCamera = new EventEmitter<string>();
 
-  mainImage: { url: string; type: 'image' | 'video' } | null = null;
+  mainImage = signal<{ full: string; url: string; type: 'image' | 'video' } | null>(null);
 
   getDetails = memo((image: string) => this._getDetails(image));
 
@@ -61,19 +61,19 @@ export class ImagesComponent implements OnChanges {
     if (changes['images']) {
       const images = changes['images'].currentValue;
       if (images?.length > 0) {
-        this.mainImage = { url: images[0], type: 'image' };
+        this.toMain(images[0], 'image');
       }
     }
     if (changes['thumbs']) {
       const images = changes['thumbs'].currentValue;
       if (images?.length > 0) {
-        this.mainImage = { url: images[0].img, type: 'image' };
+        this.toMain(images[0].thumb, 'image', images[0].img);
       }
     }
     if (changes['videos']) {
       const videos = changes['videos'].currentValue;
       if (videos?.length > 0) {
-        this.mainImage = { url: videos[0], type: 'video' };
+        this.toMain(videos[0], 'video');
       }
     }
   }
@@ -82,8 +82,11 @@ export class ImagesComponent implements OnChanges {
     this.onCamera.emit(imageUrl);
   }
 
-  toMain(url: string, type: 'image' | 'video') {
-    this.mainImage = { url, type };
+  toMain(url: string, type: 'image' | 'video', full?: string) {
+    if (full == null) {
+      full = url;
+    }
+    this.mainImage.set({ full, url, type });
   }
 
   openImage(image: string) {

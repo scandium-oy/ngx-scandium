@@ -1,18 +1,18 @@
-<div *ngIf="mainImage"
+<div *ngIf="mainImage() as mainImage"
   class="container">
   <ng-container *ngIf="mainImage.type === 'image'">
     <img class="img link"
-      (click)="openImage(mainImage.url)"
+      (click)="openImage(mainImage.full)"
       [src]="mainImage.url" />
     <div *ngIf="canDelete"
       class="delete link">
       <ion-icon name="remove-circle-outline"
         color="danger"
-        (click)="delete(mainImage.url)"></ion-icon>
+        (click)="delete(mainImage.full)"></ion-icon>
     </div>
     <div>
       <ion-note *ngIf="showDetails">
-        {{ getDetails(mainImage.url) }}
+        {{ getDetails(mainImage.full) }}
       </ion-note>
     </div>
   </ng-container>
@@ -44,7 +44,7 @@
     <div *ngFor="let image of thumbs"
       class="smalls">
       <img class="link"
-        (click)="toMain(image.img, 'image')"
+        (click)="toMain(image.thumb, 'image', image.img)"
         [src]="image.thumb" />
     </div>
   </ng-container>
