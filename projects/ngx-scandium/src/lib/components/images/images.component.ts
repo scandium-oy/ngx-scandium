@@ -83,10 +83,15 @@ export class ImagesComponent implements OnChanges {
   }
 
   toMain(url: string, type: 'image' | 'video', full?: string) {
-    if (full == null) {
-      full = url;
+    if (type === 'video') {
+      this.mainImage.set(null);
     }
-    this.mainImage.set({ full, url, type });
+    setTimeout(() => {
+      if (full == null) {
+        full = url;
+      }
+      this.mainImage.set({ full, url, type });
+    });
   }
 
   openImage(image: string) {
