@@ -60,23 +60,27 @@ export class CameraService {
     return file;
   }
 
-  async openCamera(filename: string): Promise<File> {
-    const image = await Camera.getPhoto({
-      quality: 90,
-      allowEditing: false,
-      resultType: CameraResultType.Uri,
-    });
-    const loading = await this.loadingCtrl.create({
-      message: this.translate.instant('general.wait'),
-      spinner: 'crescent',
-    });
-    loading.present();
-    const suffix =
-      image.webPath?.substring(image.webPath.lastIndexOf('/') + 1) +
-      '.' +
-      image.format;
-    const file = await this.saveImage(image, filename + '_' + suffix);
-    loading.dismiss();
-    return file;
+  async openCamera(filename: string): Promise<File | undefined> {
+    try {
+      const image = await Camera.getPhoto({
+        quality: 90,
+        allowEditing: false,
+        resultType: CameraResultType.Uri,
+      });
+      const loading = await this.loadingCtrl.create({
+        message: this.translate.instant('general.wait'),
+        spinner: 'crescent',
+      });
+      loading.present();
+      const suffix =
+        image.webPath?.substring(image.webPath.lastIndexOf('/') + 1) +
+        '.' +
+        image.format;
+      const file = await this.saveImage(image, filename + '_' + suffix);
+      loading.dismiss();
+      return file;
+    } catch (e) {
+      return undefined;
+    }
   }
 }

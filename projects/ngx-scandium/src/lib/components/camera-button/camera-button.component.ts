@@ -56,7 +56,9 @@ export class CameraButtonComponent {
 
   onCamera(): void {
     this.cameraService.openCamera(this.name).then((file) => {
-      this.saveImage(file);
+      if (file) {
+        this.saveImage(file);
+      }
     });
   }
 }
