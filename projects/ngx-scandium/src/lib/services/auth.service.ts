@@ -1,24 +1,47 @@
-import { Injectable } from '@angular/core';
+import { Injectable, computed, signal } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
   Auth,
   AuthCredential,
-  AuthProvider, createUserWithEmailAndPassword, EmailAuthProvider,
+  AuthProvider,
+  EmailAuthProvider,
+  User, UserCredential,
+  createUserWithEmailAndPassword,
   fetchSignInMethodsForEmail,
   sendPasswordResetEmail,
-  signInWithCredential, signInWithPopup, updatePassword, updateProfile, user, User, UserCredential
+  signInWithCredential, signInWithPopup, updatePassword, updateProfile, user
 } from '@angular/fire/auth';
 import { Observable } from 'rxjs';
 import { INavigationService } from './navigation.interface.service';
+
+export type AuthUser = User | null | undefined;
+
+interface AuthState {
+  user: AuthUser;
+}
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
 
+  private state = signal<AuthState>({
+    user: undefined,
+  });
+
+  user = computed(() => this.state().user);
+
   constructor(
     private auth: Auth,
     private navigationService: INavigationService,
-  ) { }
+  ) {
+    this.getUser().pipe(takeUntilDestroyed()).subscribe((user) =>
+      this.state.update((state) => ({
+        ...state,
+        user,
+      })),
+    );
+  }
 
   public getUser(): Observable<User | null> {
     return user(this.auth);
