@@ -1,0 +1,24 @@
+ion-toolbar,
+ion-content {
+  --background: var(--ion-color-primary);
+  --color: var(--ion-color-primary-contrast);
+}
+
+ion-searchbar {
+  --box-shadow: none;
+  --color: var(--ion-color-medium-contrast);
+  --icon-color: var(--ion-color-medium-contrast);
+  --placeholder-color: var(--ion-color-medium-contrast);
+  --border-radius: var(--app-border-radius);
+  padding-inline-start: 0;
+  padding-inline-end: 0;
+}
+
+ion-item {
+  --border-radius: var(--app-border-radius);
+  margin-top: 0.5em;
+}
+
+.flex {
+  gap: 0.5em;
+}

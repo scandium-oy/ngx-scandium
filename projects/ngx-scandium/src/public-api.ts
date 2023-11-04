@@ -11,6 +11,7 @@ export * from './lib/components/loading/loading.component';
 export * from './lib/components/loading/loading.module';
 export * from './lib/components/logo/logo.component';
 export * from './lib/components/logo/logo.module';
+export * from './lib/components/select-dialog/select.dialog';
 export * from './lib/directives/format-number/format-number.directive';
 export * from './lib/directives/format-number/format-number.module';
 export * from './lib/directives/round-number/round-number.directive';
