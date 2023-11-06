@@ -1,11 +1,18 @@
 import { Injectable } from '@angular/core';
 import {
+  Firestore,
+  QueryConstraint,
   addDoc, collection, collectionData,
-  deleteDoc, doc, docData, Firestore, getDoc, getDocs,
-  query, QueryConstraint, setDoc, updateDoc
+  deleteDoc,
+  disableNetwork,
+  doc, docData,
+  enableNetwork,
+  getDoc, getDocs,
+  query,
+  setDoc, updateDoc,
 } from '@angular/fire/firestore';
-import { getDownloadURL, ref, Storage, uploadBytes } from '@angular/fire/storage';
-import { from, Observable, of } from 'rxjs';
+import { Storage, getDownloadURL, ref, uploadBytes } from '@angular/fire/storage';
+import { Observable, from, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { FileUpload, FirestoreItem } from '../models';
 import { fieldSorter } from '../utility';
@@ -130,6 +137,14 @@ export class FirestoreService {
     })).pipe(
       catchError((_err) => of([]).pipe(tap((_) => console.log(`${collectionKey} fetch error`)))),
     );
+  }
+
+  toggleNetwork(offline: boolean) {
+    if (offline) {
+      return disableNetwork(this.firestore);
+    } else {
+      return enableNetwork(this.firestore);
+    }
   }
 
   async pushFileToStorage(fileUpload: FileUpload, path: string): Promise<string> {
