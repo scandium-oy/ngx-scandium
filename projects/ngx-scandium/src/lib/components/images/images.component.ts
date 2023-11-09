@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, signal } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { FileUpload } from '../../models';
+import { QueueItem } from '../../services/queue.service';
 import { memo } from '../../utility';
 import { ImageDialogComponent } from '../image-dialog/image.dialog';
 
@@ -41,6 +43,9 @@ export class ImagesComponent implements OnChanges {
   @Output()
   onCamera = new EventEmitter<string>();
 
+  @Output()
+  onQueue = new EventEmitter<QueueItem<FileUpload>>();
+
   mainImage = signal<{ full: string; url: string; type: 'image' | 'video' } | null>(null);
 
   getDetails = memo((image: string) => this._getDetails(image));
@@ -80,6 +85,11 @@ export class ImagesComponent implements OnChanges {
 
   onImageUrl(imageUrl: string) {
     this.onCamera.emit(imageUrl);
+  }
+
+  onQueueItem(item: QueueItem<FileUpload>) {
+    item.cb = (imgUrl) => console.log('2', imgUrl);
+    this.onQueue.emit(item);
   }
 
   toMain(url: string, type: 'image' | 'video', full?: string) {

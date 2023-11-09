@@ -66,7 +66,6 @@ export class CameraService {
         quality: 90,
         allowEditing: false,
         resultType: CameraResultType.Uri,
-        webUseInput: true,
       });
       const loading = await this.loadingCtrl.create({
         message: this.translate.instant('general.wait'),

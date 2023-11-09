@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FileUpload } from '../../models';
 import { CameraService } from '../../services/camera.service';
 import { LoadingService } from '../../services/loading.service';
+import { QueueItem, QueueService, QueueTypes } from '../../services/queue.service';
 import { UploadService } from '../../services/upload.service';
 
 @Component({
@@ -35,23 +36,41 @@ export class CameraButtonComponent {
   @Input()
   hideText = false;
 
+  @Input()
+  cb?: (imageUrl: string) => void;
+
   @Output()
-  imageUrl: EventEmitter<string> = new EventEmitter();
+  imageUrl = new EventEmitter<string>();
+
+  @Output()
+  queueItem = new EventEmitter<QueueItem<FileUpload>>();
 
   constructor(
     private cameraService: CameraService,
     private loadingService: LoadingService,
+    private queueService: QueueService,
     private uploadService: UploadService,
   ) { }
 
   private async saveImage(imageFile: File) {
-    this.loadingService.showLoading();
     const guid = this.name + '-' + new Date().toISOString();
     const fileupload = new FileUpload(guid, imageFile);
-    this.uploadService.uploadImage(fileupload).then((downloadUrl) => {
-      this.loadingService.hideLoading();
-      this.imageUrl.emit(downloadUrl);
-    });
+    if (this.queueService.isOnline()) {
+      this.loadingService.showLoading(5000);
+      this.uploadService.uploadImage(fileupload).then((downloadUrl) => {
+        this.loadingService.hideLoading();
+        this.imageUrl.emit(downloadUrl);
+      });
+    } else {
+      const item = {
+        type: QueueTypes.image,
+        item: fileupload,
+      };
+      if (this.cb) {
+        const queueItem = this.queueService.addToQueue(item, this.cb);
+        this.queueItem.emit(queueItem);
+      }
+    }
   }
 
   onCamera(): void {

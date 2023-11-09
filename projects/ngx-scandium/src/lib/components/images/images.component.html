@@ -39,7 +39,8 @@
       [hideText]="true"
       [fill]="'solid'"
       [multiline]="true"
-      (imageUrl)="onImageUrl($event)"></app-camera-button>
+      (imageUrl)="onImageUrl($event)"
+      (queueItem)="onQueueItem($event)"></app-camera-button>
   </div>
   <ng-container *ngIf="thumbs && thumbs.length > 0 else imagesTemplate">
     <div *ngFor="let image of thumbs"
