@@ -18,8 +18,8 @@ export interface SelectItem {
   imports: [
     CommonModule,
     IonicModule,
-    TranslateModule,
-  ],
+    TranslateModule
+],
 })
 export class SelectDialogComponent<T extends SelectItem> {
 

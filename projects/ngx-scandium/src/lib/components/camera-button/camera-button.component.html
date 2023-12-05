@@ -3,18 +3,22 @@
   [expand]="expand"
   [shape]="shape"
   (click)="onCamera()">
-  <div *ngIf="multiline else sameLineTemplate"
-    class="multiline">
+  @if (multiline) {
+  <div class="multiline">
     <ion-icon name="camera-outline"></ion-icon>
-    <span *ngIf="!hideText">
+    @if (!hideText) {
+    <span>
       {{ title | translate }}
     </span>
+    }
   </div>
-  <ng-template #sameLineTemplate>
-    <ion-icon slot="start"
-      name="camera-outline"></ion-icon>
-    <span *ngIf="!hideText">
-      {{ title | translate }}
-    </span>
-  </ng-template>
+  } @else {
+  <ion-icon slot="start"
+    name="camera-outline"></ion-icon>
+  @if (!hideText) {
+  <span>
+    {{ title | translate }}
+  </span>
+  }
+  }
 </ion-button>

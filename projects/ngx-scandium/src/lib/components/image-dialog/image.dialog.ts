@@ -9,8 +9,8 @@ import { IonicModule, IonicSlides, ModalController, NavParams } from '@ionic/ang
   styleUrls: ['image.dialog.scss'],
   imports: [
     IonicModule,
-    CommonModule,
-  ],
+    CommonModule
+],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class ImageDialogComponent {

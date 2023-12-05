@@ -1,40 +1,45 @@
-<div *ngIf="mainImage() as mainImage"
-  class="container">
-  <ng-container *ngIf="mainImage.type === 'image'">
-    <img class="img link"
-      (click)="openImage(mainImage.full)"
-      [src]="mainImage.url" />
-    <div *ngIf="canDelete"
-      class="delete link">
-      <ion-icon name="remove-circle-outline"
-        color="danger"
-        (click)="delete(mainImage.full)"></ion-icon>
-    </div>
-    <div>
-      <ion-note *ngIf="showDetails">
-        {{ getDetails(mainImage.full) }}
-      </ion-note>
-    </div>
-  </ng-container>
-  <ng-container *ngIf="mainImage.type === 'video'">
-    <video controls
-      playsinline
-      preload="metadata">
-      <source [src]="mainImage.url + '#t=0.5'"
-        type="video/mp4">
-    </video>
-  </ng-container>
+@if (mainImage(); as mainImage) {
+<div class="container">
+  @if (mainImage.type === 'image') {
+  <img class="img link"
+    (click)="openImage(mainImage.full)"
+    [src]="mainImage.url" />
+  @if (canDelete) {
+  <div class="delete link">
+    <ion-icon name="remove-circle-outline"
+      color="danger"
+      (click)="delete(mainImage.full)"></ion-icon>
+  </div>
+  }
   <div>
-    <ion-note *ngIf="showDetails">
+    @if (showDetails) {
+    <ion-note>
+      {{ getDetails(mainImage.full) }}
+    </ion-note>
+    }
+  </div>
+  }
+  @if (mainImage.type === 'video') {
+  <video controls
+    playsinline
+    preload="metadata">
+    <source [src]="mainImage.url + '#t=0.5'"
+      type="video/mp4">
+  </video>
+  }
+  <div>
+    @if (showDetails) {
+    <ion-note>
       {{ getDetails(mainImage) }}
     </ion-note>
+    }
   </div>
 </div>
-<div
-  *ngIf="showCamera || (images && images.length > 1) || (thumbs && thumbs.length > 1) || (videos && videos.length > 1)"
-  class="images">
-  <div *ngIf="showCamera != null && mainImage != null"
-    class="smalls">
+}
+@if (showCamera || (images && images.length > 1) || (thumbs && thumbs.length > 1) || (videos && videos.length > 1)) {
+<div class="images">
+  @if (showCamera != null && mainImage != null) {
+  <div class="smalls">
     <app-camera-button [name]="showCamera"
       [hideText]="true"
       [fill]="'solid'"
@@ -42,29 +47,33 @@
       (imageUrl)="onImageUrl($event)"
       (queueItem)="onQueueItem($event)"></app-camera-button>
   </div>
-  <ng-container *ngIf="thumbs && thumbs.length > 0 else imagesTemplate">
-    <div *ngFor="let image of thumbs"
-      class="smalls">
-      <img class="link"
-        (click)="toMain(image.thumb, 'image', image.img)"
-        [src]="image.thumb" />
-    </div>
-  </ng-container>
-  <ng-template #imagesTemplate>
-    <div *ngFor="let image of images"
-      class="smalls">
-      <img class="link"
-        (click)="toMain(image, 'image')"
-        [src]="image" />
-    </div>
-    <div *ngFor="let video of videos"
-      class="smalls">
-      <video class="link"
-        preload="metadata"
-        (click)="toMain(video, 'video')">
-        <source [src]="video + '#t=0.5'"
-          type="video/mp4">
-      </video>
-    </div>
-  </ng-template>
+  }
+  @if (thumbs && thumbs.length > 0) {
+  @for (image of thumbs; track image) {
+  <div class="smalls">
+    <img class="link"
+      (click)="toMain(image.thumb, 'image', image.img)"
+      [src]="image.thumb" />
+  </div>
+  }
+  } @else {
+  @for (image of images; track image) {
+  <div class="smalls">
+    <img class="link"
+      (click)="toMain(image, 'image')"
+      [src]="image" />
+  </div>
+  }
+  @for (video of videos; track video) {
+  <div class="smalls">
+    <video class="link"
+      preload="metadata"
+      (click)="toMain(video, 'video')">
+      <source [src]="video + '#t=0.5'"
+        type="video/mp4">
+    </video>
+  </div>
+  }
+  }
 </div>
+}

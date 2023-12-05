@@ -4,11 +4,13 @@
     pagination-clickable="true"
     zoom="true"
     [modules]="swiperModules">
-    <swiper-slide *ngFor="let imageUrl of imageUrls">
-      <div class="swiper-zoom-container">
-        <img [src]="imageUrl" />
-      </div>
-    </swiper-slide>
+    @for (imageUrl of imageUrls; track imageUrl) {
+      <swiper-slide>
+        <div class="swiper-zoom-container">
+          <img [src]="imageUrl" />
+        </div>
+      </swiper-slide>
+    }
   </swiper-container>
 </ion-content>
 <ion-footer class="ion-no-border">

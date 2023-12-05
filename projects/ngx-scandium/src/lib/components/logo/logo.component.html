@@ -1,5 +1,7 @@
 <div class="client-logo-container">
-  <img *ngIf="logo"
-    class="client-logo"
-    [src]="logo" />
+  @if (logo) {
+    <img
+      class="client-logo"
+      [src]="logo" />
+  }
 </div>

@@ -18,31 +18,39 @@
     <ion-searchbar #filter
       mode="ios"
       [placeholder]="'general.filter' | translate"
-      (ionInput)="onFilter(filter)"></ion-searchbar>
+    (ionInput)="onFilter(filter)"></ion-searchbar>
   </div>
-  <ion-item *ngFor="let item of items$ | async"
-    button="true"
-    lines="none"
-    (click)="select(item)">
-    <ion-icon *ngIf="item.selected"
-      slot="start"
-      name="checkmark-outline"></ion-icon>
-    {{ item.name }}
-  </ion-item>
+  @for (item of items$ | async; track item) {
+    <ion-item
+      button="true"
+      lines="none"
+      (click)="select(item)">
+      @if (item.selected) {
+        <ion-icon
+          slot="start"
+        name="checkmark-outline"></ion-icon>
+      }
+      {{ item.name }}
+    </ion-item>
+  }
   <div class="ion-margin-top flex">
-    <ion-button *ngIf="multiple"
-      color="light"
-      shape="round"
-      (click)="save()">
-      {{ 'general.select' | translate }}
-    </ion-button>
-    <ion-button *ngIf="clearButton"
-      color="light"
-      shape="round"
-      (click)="clear()">
-      <ion-icon slot="start"
+    @if (multiple) {
+      <ion-button
+        color="light"
+        shape="round"
+        (click)="save()">
+        {{ 'general.select' | translate }}
+      </ion-button>
+    }
+    @if (clearButton) {
+      <ion-button
+        color="light"
+        shape="round"
+        (click)="clear()">
+        <ion-icon slot="start"
         name="close-outline"></ion-icon>
-      {{ 'general.clear' | translate }}
-    </ion-button>
+        {{ 'general.clear' | translate }}
+      </ion-button>
+    }
   </div>
 </ion-content>
