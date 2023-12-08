@@ -16,7 +16,7 @@
   "editor.tabSize": 2,
   "editor.wordWrap": "off",
   "editor.codeActionsOnSave": {
-    "source.fixAll": true,
+    "source.fixAll": "explicit"
   },
   "files.eol": "\n",
   "files.encoding": "utf8",
@@ -24,8 +24,8 @@
   "[typescript]": {
     "editor.formatOnPaste": true,
     "editor.codeActionsOnSave": {
-      "source.organizeImports": true,
-      "source.fixAll.eslint": true,
+      "source.organizeImports": "explicit",
+      "source.fixAll.eslint": "explicit"
     },
     "files.insertFinalNewline": true,
   },
@@ -39,7 +39,7 @@
   "html.suggest.html5": true,
   "[scss]": {
     "editor.codeActionsOnSave": {
-      "source.fixAll.stylelint": true,
+      "source.fixAll.stylelint": "explicit"
     },
   },
   "typescript.tsdk": "node_modules\\typescript\\lib",
