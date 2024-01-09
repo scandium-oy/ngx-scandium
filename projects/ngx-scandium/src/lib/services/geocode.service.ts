@@ -23,4 +23,16 @@ export class GeocodeService {
         })
       );
   }
+
+  getGeocodStructured(address: string, postalCode: string): Observable<ILocation | null> {
+    return this.http.get<any[]>(`${mapHost}/search?street=${address}&postalcode=${postalCode}&format=json`)
+      .pipe(
+        map((response) => {
+          if (response.length > 0) {
+            return { longitude: response[0].lon, latitude: response[0].lat };
+          }
+          return null;
+        })
+      );
+  }
 }
