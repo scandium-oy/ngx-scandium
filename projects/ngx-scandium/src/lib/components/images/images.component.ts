@@ -111,7 +111,7 @@ export class ImagesComponent implements OnChanges {
       cssClass: ['modal-fullscreen', 'transparent-modal'],
     }).then((modal) => {
       modal.present();
-    })
+    });
   }
 
   delete(image: string) {

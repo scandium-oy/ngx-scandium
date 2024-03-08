@@ -24,8 +24,12 @@ export class GeocodeService {
       );
   }
 
-  getGeocodStructured(address: string, postalCode: string): Observable<ILocation | null> {
-    return this.http.get<any[]>(`${mapHost}/search?street=${address}&postalcode=${postalCode}&format=json`)
+  getGeocodeStructured(address: string, postalCode: string, city?: string): Observable<ILocation | null> {
+    let url = `${mapHost}/search?street=${address}&postalcode=${postalCode}&format=json`;
+    if (city) {
+      url += `&city=${city}`;
+    }
+    return this.http.get<any[]>(url)
       .pipe(
         map((response) => {
           if (response.length > 0) {
