@@ -7,6 +7,7 @@ import {
   disableNetwork,
   doc, docData,
   enableNetwork,
+  getCountFromServer,
   getDoc, getDocs,
   query,
   setDoc, updateDoc,
@@ -25,6 +26,12 @@ export class FirestoreService {
     private firestore: Firestore,
     private storage: Storage,
   ) { }
+
+  getCount(collectionKey: string, queryConstraints: QueryConstraint[] = []) {
+    const collectionRef = collection(this.firestore, collectionKey);
+    const q = query(collectionRef, ...queryConstraints);
+    return getCountFromServer(q).then((data) => data.data().count);
+  }
 
   saveAs<T extends FirestoreItem>(collectionKey: string, guid: string, item: T, converter: any = null) {
     const docRef = doc(this.firestore, collectionKey, guid).withConverter(converter);
