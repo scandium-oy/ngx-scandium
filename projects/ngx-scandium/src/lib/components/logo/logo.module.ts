@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { LogoComponent } from './logo.component';
@@ -8,6 +8,7 @@ import { LogoComponent } from './logo.component';
   imports: [
     CommonModule,
     IonicModule,
+    NgOptimizedImage,
   ],
   exports: [LogoComponent],
 })
