@@ -27,6 +27,33 @@ export class FirestoreService {
     private storage: Storage,
   ) { }
 
+  private printQueryConstraints(list: QueryConstraint[]) {
+    const ret: string[] = [];
+
+    list.map((q) => {
+      if (q.type === 'where') {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const qq = q as any;
+        // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+        ret.push(`${qq._field.segments}`);
+      }
+    });
+
+    return ret.join(',');
+  }
+
+  private checkQueryConstraints(collectionKey: string, list: QueryConstraint[]) {
+    list.map((q) => {
+      if (q.type === 'where') {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const qq = q as any;
+        if (qq._value === undefined) {
+          console.warn(collectionKey, 'Where value is undefined', qq._field.segments, qq._op);
+        }
+      }
+    });
+  }
+
   getCount(collectionKey: string, queryConstraints: QueryConstraint[] = []) {
     const collectionRef = collection(this.firestore, collectionKey);
     const q = query(collectionRef, ...queryConstraints);
@@ -70,7 +97,7 @@ export class FirestoreService {
   ): Observable<T | null> {
     const docRef = doc(this.firestore, collectionKey, guid).withConverter(converter);
     return docData(docRef, { idField: 'guid' }).pipe(
-      catchError((_err) => of(null).pipe(tap((_) => console.log(`${collectionKey} fetch error`)))),
+      catchError((_err) => of(null).pipe(tap((_) => console.log(`get ${collectionKey} fetch error`)))),
       map((item) => {
         if (item) {
           item['guid'] = guid;
@@ -89,7 +116,7 @@ export class FirestoreService {
   ): Observable<T | null> {
     const docRef = doc(this.firestore, collectionKey, guid).withConverter(converter);
     return from(getDoc(docRef)).pipe(
-      catchError((_err) => of(null).pipe(tap((_) => console.log(`${collectionKey} fetch error`)))),
+      catchError((_err) => of(null).pipe(tap((_) => console.log(`getOnce ${collectionKey} fetch error`)))),
       map((ret) => {
         const item = ret?.data();
         if (item) {
@@ -111,7 +138,7 @@ export class FirestoreService {
     const collectionRef = collection(this.firestore, collectionKey).withConverter(converter);
     const q = query(collectionRef, ...queryConstraints);
     return collectionData(q, { idField: 'guid' }).pipe(
-      catchError((_err) => of(null).pipe(tap((_) => console.log(`${collectionKey} fetch error`)))),
+      catchError((err) => of(null).pipe(tap((_) => console.info(`getList ${collectionKey} '${this.printQueryConstraints(queryConstraints)}' fetch error`, err)))),
       map((items) => {
         if (orderBy) {
           items = items?.sort(fieldSorter([orderBy.value])) ?? null;
@@ -129,7 +156,7 @@ export class FirestoreService {
     orderBy?: { value: string; sort: string },
     queryConstraints: QueryConstraint[] = [],
     converter: any = null,
-  ): Observable<T[]> {
+  ): Observable<T[] | null> {
     const collectionRef = collection(this.firestore, collectionKey).withConverter(converter);
     const q = query(collectionRef, ...queryConstraints);
     return from(getDocs(q).then((ret) => {
@@ -142,7 +169,7 @@ export class FirestoreService {
       }
       return items?.map((item: any) => item as T) ?? [];
     })).pipe(
-      catchError((_err) => of([]).pipe(tap((_) => console.log(`${collectionKey} fetch error`)))),
+      catchError((err) => of(null).pipe(tap((_) => console.info(`getListOnce ${collectionKey} '${this.printQueryConstraints(queryConstraints)}' fetch error`, err)))),
     );
   }
 
@@ -159,5 +186,12 @@ export class FirestoreService {
     const storageRef = ref(this.storage, filePath);
     const result = await uploadBytes(storageRef, fileUpload.file);
     return await getDownloadURL(result.ref);
+  }
+
+  async pushFileToStorageRef(fileUpload: FileUpload, path: string) {
+    const filePath = `${path}/${fileUpload.file.name}`;
+    const storageRef = ref(this.storage, filePath);
+    const result = await uploadBytes(storageRef, fileUpload.file);
+    return result.ref;
   }
 }
