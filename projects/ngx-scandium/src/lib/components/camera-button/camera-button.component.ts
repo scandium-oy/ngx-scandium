@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, input } from '@angular/core';
 import { FileUpload } from '../../models';
 import { CameraService } from '../../services/camera.service';
 import { LoadingService } from '../../services/loading.service';
@@ -14,6 +14,8 @@ export class CameraButtonComponent {
 
   @Input()
   color = 'primary';
+
+  disabled = input(false);
 
   @Input()
   name: string = '';
