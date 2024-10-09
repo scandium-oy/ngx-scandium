@@ -4,12 +4,24 @@
     pagination-clickable="true"
     zoom="true"
     [modules]="swiperModules">
+    @if (videoS()) {
+    <swiper-slide>
+      <video class="link media"
+        preload="metadata"
+        controls
+        playsinline>
+        <source [src]="videoS() + '#t=0.5'"
+          type="video/mp4">
+      </video>
+    </swiper-slide>
+    } @else {
     @for (imageUrl of imageUrls; track imageUrl) {
-      <swiper-slide>
-        <div class="swiper-zoom-container">
-          <img [src]="imageUrl" />
-        </div>
-      </swiper-slide>
+    <swiper-slide>
+      <div class="swiper-zoom-container">
+        <img [src]="imageUrl" />
+      </div>
+    </swiper-slide>
+    }
     }
   </swiper-container>
 </ion-content>

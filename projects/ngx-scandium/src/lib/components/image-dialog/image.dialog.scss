@@ -12,6 +12,12 @@ swiper-container {
   }
 }
 
+video {
+  object-fit: contain;
+  border-radius: var(--app-card-radius);
+  width: 100%;
+}
+
 .flex {
   display: flex;
   justify-content: center;

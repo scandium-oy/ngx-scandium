@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { CUSTOM_ELEMENTS_SCHEMA, Component } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, Component, signal } from '@angular/core';
 import { IonicModule, IonicSlides, ModalController, NavParams } from '@ionic/angular';
 
 @Component({
@@ -10,13 +10,14 @@ import { IonicModule, IonicSlides, ModalController, NavParams } from '@ionic/ang
   imports: [
     IonicModule,
     CommonModule
-],
+  ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class ImageDialogComponent {
 
   swiperModules = [IonicSlides];
   imageUrls: string[];
+  videoS = signal<string | null>(null);
 
   constructor(
     private _modal: ModalController,
@@ -29,6 +30,7 @@ export class ImageDialogComponent {
     } else {
       this.imageUrls = [currentImg];
     }
+    this.videoS.set(navParams.get('video'));
   }
 
   dismiss() {
