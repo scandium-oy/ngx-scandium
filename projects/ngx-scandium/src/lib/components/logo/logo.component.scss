@@ -3,7 +3,12 @@
 }
 
 .client-logo-container {
+  display: var(--app-logo-display, block);
   width: var(--app-logo-width, 50px);
+
+  img {
+    width: 100%;
+  }
 }
 
 .client-logo {

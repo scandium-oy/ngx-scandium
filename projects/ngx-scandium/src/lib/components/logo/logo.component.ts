@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, input } from '@angular/core';
 
 @Component({
   selector: 'app-logo',
@@ -7,6 +7,5 @@ import { Component, Input } from '@angular/core';
 })
 export class LogoComponent {
 
-  @Input()
-  logo: string = '';
+  logo = input.required<string>();
 }
