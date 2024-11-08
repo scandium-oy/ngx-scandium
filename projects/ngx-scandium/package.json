@@ -1,6 +1,6 @@
 {
   "name": "@scandium-oy/ngx-scandium",
-  "version": "18.0.0",
+  "version": "18.0.1",
   "author": {
     "name": "Scandium"
   },
@@ -15,8 +15,8 @@
     "@capacitor/filesystem": ">=6.0.0",
     "@ionic/angular": ">=8.0.0",
     "@ionic/storage-angular": "^4.0.0",
-    "@ngx-translate/core": ">=15.0.0",
-    "@ngx-translate/http-loader": ">=7.0.0",
+    "@ngx-translate/core": ">=16.0.0",
+    "@ngx-translate/http-loader": ">=16.0.0",
     "base64-arraybuffer": "~1.0.2",
     "rxjs": "~7.8.1",
     "swiper": "^11.1.14"
