@@ -1,4 +1,4 @@
-import { DocumentData, DocumentReference } from '@firebase/firestore';
+import { DocumentData, DocumentReference } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 
 export interface IService<T> {

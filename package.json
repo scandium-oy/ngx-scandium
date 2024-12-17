@@ -24,7 +24,7 @@
     "@capacitor/camera": "^6.1.0",
     "@capacitor/dialog": "^6.0.1",
     "@capacitor/filesystem": "^6.0.1",
-    "@ionic/angular": "^8.3.4",
+    "@ionic/angular": "^8.4.1",
     "@ionic/storage-angular": "^4.0.0",
     "@ngx-translate/core": "^16.0.3",
     "@ngx-translate/http-loader": "^16.0.0",

@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import {
+  DocumentData,
+  DocumentReference,
   Firestore,
   QueryConstraint,
   addDoc, collection, collectionData,
@@ -12,7 +14,7 @@ import {
   query,
   setDoc, updateDoc,
 } from '@angular/fire/firestore';
-import { Storage, getDownloadURL, ref, uploadBytes } from '@angular/fire/storage';
+import { Storage, StorageReference, getDownloadURL, ref, uploadBytes } from '@angular/fire/storage';
 import { Observable, from, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { FileUpload, FirestoreItem } from '../models';
@@ -65,9 +67,9 @@ export class FirestoreService {
     return setDoc(docRef, item);
   }
 
-  save<T extends FirestoreItem>(collectionKey: string, item: T, converter: any = null) {
+  save<T extends FirestoreItem>(collectionKey: string, item: T, converter: any = null): Promise<DocumentReference<DocumentData, DocumentData>> {
     const collectionRef = collection(this.firestore, collectionKey).withConverter(converter);
-    return addDoc(collectionRef, item);
+    return addDoc<DocumentData, DocumentData>(collectionRef, item);
   }
 
   update<T extends FirestoreItem>(collectionKey: string, item: T, converter: any = null) {
@@ -188,7 +190,7 @@ export class FirestoreService {
     return await getDownloadURL(result.ref);
   }
 
-  async pushFileToStorageRef(fileUpload: FileUpload, path: string) {
+  async pushFileToStorageRef(fileUpload: FileUpload, path: string): Promise<StorageReference> {
     const filePath = `${path}/${fileUpload.file.name}`;
     const storageRef = ref(this.storage, filePath);
     const result = await uploadBytes(storageRef, fileUpload.file);
