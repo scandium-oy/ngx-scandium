@@ -11,14 +11,15 @@ export interface SelectItem {
 }
 
 @Component({
-    selector: 'app-select-dialog',
-    templateUrl: './select.dialog.html',
-    styleUrls: ['select.dialog.scss'],
-    imports: [
-        CommonModule,
-        IonicModule,
-        TranslateModule
-    ]
+  standalone: true,
+  selector: 'app-select-dialog',
+  templateUrl: './select.dialog.html',
+  styleUrls: ['select.dialog.scss'],
+  imports: [
+    CommonModule,
+    IonicModule,
+    TranslateModule
+  ]
 })
 export class SelectDialogComponent<T extends SelectItem> {
 

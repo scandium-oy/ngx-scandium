@@ -1,13 +1,13 @@
 {
   "name": "@scandium-oy/ngx-scandium",
-  "version": "19.0.1",
+  "version": "19.0.2",
   "author": {
     "name": "Scandium"
   },
   "peerDependencies": {
     "@angular/common": ">=19.0.0",
     "@angular/core": ">=19.0.0",
-    "@angular/fire": ">=18.0.0",
+    "@angular/fire": "19.0.0-rc.4",
     "@angular/router": ">=19.0.0",
     "@angular/service-worker": ">=19.0.0",
     "@capacitor/camera": ">=6.0.0",

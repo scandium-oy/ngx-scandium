@@ -11,6 +11,7 @@ const isTimestamp = (object: any): object is Timestamp => {
 };
 
 @Pipe({
+  standalone: true,
   name: 'timestamp',
 })
 export class TimestampPipe implements PipeTransform {

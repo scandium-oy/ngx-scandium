@@ -9,6 +9,7 @@ import { QueueItem, QueueService, QueueTypes } from '../../services/queue.servic
 import { UploadService } from '../../services/upload.service';
 
 @Component({
+  standalone: true,
   selector: 'app-camera-button',
   styleUrls: ['camera-button.component.scss'],
   templateUrl: 'camera-button.component.html',

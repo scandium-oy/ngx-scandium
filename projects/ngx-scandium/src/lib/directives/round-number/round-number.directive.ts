@@ -1,6 +1,7 @@
 import { Directive, ElementRef, Input } from '@angular/core';
 
 @Directive({
+  standalone: true,
   selector: '[appRoundNumber]',
 })
 export class RoundNumberDirective {

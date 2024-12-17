@@ -9,6 +9,7 @@ import { ImageDialogComponent } from '../image-dialog/image.dialog';
 
 
 @Component({
+  standalone: true,
   selector: 'app-images',
   templateUrl: 'images.component.html',
   styleUrls: ['./images.component.scss'],

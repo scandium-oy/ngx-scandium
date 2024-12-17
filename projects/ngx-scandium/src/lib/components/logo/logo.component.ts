@@ -3,6 +3,7 @@ import { Component, input } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 
 @Component({
+  standalone: true,
   selector: 'app-logo',
   styleUrls: ['logo.component.scss'],
   templateUrl: 'logo.component.html',
