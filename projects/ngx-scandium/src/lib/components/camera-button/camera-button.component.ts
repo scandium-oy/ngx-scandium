@@ -1,4 +1,7 @@
+import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output, input } from '@angular/core';
+import { IonicModule } from '@ionic/angular';
+import { TranslateModule } from '@ngx-translate/core';
 import { FileUpload } from '../../models';
 import { CameraService } from '../../services/camera.service';
 import { LoadingService } from '../../services/loading.service';
@@ -9,6 +12,11 @@ import { UploadService } from '../../services/upload.service';
   selector: 'app-camera-button',
   styleUrls: ['camera-button.component.scss'],
   templateUrl: 'camera-button.component.html',
+  imports: [
+    CommonModule,
+    IonicModule,
+    TranslateModule,
+  ],
 })
 export class CameraButtonComponent {
 
