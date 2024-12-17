@@ -3,15 +3,14 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, signal } from '@angular/core';
 import { IonicModule, IonicSlides, ModalController, NavParams } from '@ionic/angular';
 
 @Component({
-  standalone: true,
-  selector: 'app-image-dialog',
-  templateUrl: 'image.dialog.html',
-  styleUrls: ['image.dialog.scss'],
-  imports: [
-    IonicModule,
-    CommonModule
-  ],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    selector: 'app-image-dialog',
+    templateUrl: 'image.dialog.html',
+    styleUrls: ['image.dialog.scss'],
+    imports: [
+        IonicModule,
+        CommonModule
+    ],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class ImageDialogComponent {
 

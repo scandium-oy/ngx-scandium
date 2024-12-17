@@ -1,6 +1,8 @@
 import { Directive, ElementRef, Input } from '@angular/core';
 
-@Directive({ selector: '[appRoundNumber]' })
+@Directive({
+  selector: '[appRoundNumber]',
+})
 export class RoundNumberDirective {
 
   @Input()

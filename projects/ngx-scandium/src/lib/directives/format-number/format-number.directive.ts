@@ -1,6 +1,8 @@
 import { Directive, ElementRef, Input } from '@angular/core';
 
-@Directive({ selector: '[appFormatNumber]' })
+@Directive({
+  selector: '[appFormatNumber]',
+})
 export class FormatNumberDirective {
 
   @Input()
