@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { LoadingController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -6,22 +6,19 @@ import { TranslateService } from '@ngx-translate/core';
   providedIn: 'root',
 })
 export class LoadingService {
+  private loadingCtrl = inject(LoadingController);
+  private translate = inject(TranslateService);
 
   private loading: HTMLIonLoadingElement | null = null;
 
-  constructor(
-    private loadingCtrl: LoadingController,
-    private translate: TranslateService,
-  ) { }
-
-  public showLoading(duration?: number) {
+  showLoading(duration?: number, msg = 'general.pleaseWait', cssClass?: string[]) {
     if (this.loading == null) {
       this.loadingCtrl.create({
         spinner: 'circles',
         duration,
-        message: this.translate.instant('general.pleaseWait'),
+        message: this.translate.instant(msg),
         keyboardClose: false,
-        translucent: true,
+        cssClass,
       }).then((loading) => {
         this.loading = loading;
         this.loading.present();
@@ -30,7 +27,7 @@ export class LoadingService {
     }
   }
 
-  public hideLoading() {
+  hideLoading() {
     this.loading?.dismiss().then(() => {
       console.log('Hiding loading');
       this.loading = null;
