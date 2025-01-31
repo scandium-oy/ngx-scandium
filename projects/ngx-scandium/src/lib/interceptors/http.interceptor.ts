@@ -18,6 +18,7 @@ export class TokenInterceptor implements HttpInterceptor {
       || (req.url.includes('/contractors/') && req.method === 'GET')
       || (req.url.includes('/clients/') && req.method === 'GET')
       || (req.url.includes('/users/invite') && req.method === 'POST')
+      || (req.url.includes('/signature/passcode') && req.method === 'POST')
       || req.url.startsWith(mapHost)) {
       return next.handle(req);
     }

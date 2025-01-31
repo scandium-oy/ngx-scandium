@@ -1,18 +1,14 @@
-import { Directive, ElementRef, Input } from '@angular/core';
+import { Directive, ElementRef, inject, Input } from '@angular/core';
 
 @Directive({
-  standalone: true,
   selector: '[appFormatNumber]',
 })
 export class FormatNumberDirective {
+  private el = inject(ElementRef);
 
   @Input()
-  set formatNumber(value: number | string) {
+  set appFormatNumber(value: number | string) {
     this.trimValue(value);
-  }
-
-  constructor(private el: ElementRef) {
-
   }
 
   private trimValue(value: number | string) {
