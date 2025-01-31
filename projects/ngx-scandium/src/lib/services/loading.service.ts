@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { LoadingController } from '@ionic/angular';
+import { LoadingController } from '@ionic/angular/standalone';
 import { TranslateService } from '@ngx-translate/core';
 
 @Injectable({

@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { IonSearchbar, IonicModule, ModalController, NavParams } from '@ionic/angular';
+import { IonButton, IonButtons, IonContent, IonHeader, IonIcon, IonItem, IonSearchbar, IonTitle, IonToolbar, ModalController, NavParams } from '@ionic/angular/standalone';
 import { TranslateModule } from '@ngx-translate/core';
 import { BehaviorSubject, combineLatest, map, shareReplay } from 'rxjs';
 
@@ -15,11 +15,18 @@ export interface SelectItem {
   selector: 'app-select-dialog',
   templateUrl: './select.dialog.html',
   styleUrls: ['select.dialog.scss'],
-  imports: [
+  imports: [IonButton,
     CommonModule,
-    IonicModule,
-    TranslateModule
-  ]
+    TranslateModule,
+    IonHeader,
+    IonToolbar,
+    IonTitle,
+    IonButtons,
+    IonIcon,
+    IonContent,
+    IonSearchbar,
+    IonItem,
+  ],
 })
 export class SelectDialogComponent<T extends SelectItem> {
 

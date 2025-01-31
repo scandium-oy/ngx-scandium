@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Camera, CameraResultType, Photo } from '@capacitor/camera';
 import { Filesystem } from '@capacitor/filesystem';
-import { LoadingController, Platform } from '@ionic/angular';
+import { LoadingController, Platform } from '@ionic/angular/standalone';
 import { TranslateService } from '@ngx-translate/core';
 import { decode } from 'base64-arraybuffer';
 

@@ -1,6 +1,5 @@
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { Component, input } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
 
 @Component({
   standalone: true,
@@ -9,7 +8,6 @@ import { IonicModule } from '@ionic/angular';
   templateUrl: 'logo.component.html',
   imports: [
     CommonModule,
-    IonicModule,
     NgOptimizedImage,
   ],
 })

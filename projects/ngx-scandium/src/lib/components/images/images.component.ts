@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, signal } from '@angular/core';
-import { IonicModule, ModalController } from '@ionic/angular';
+import { IonIcon, IonNote, ModalController } from '@ionic/angular/standalone';
 import { FileUpload } from '../../models';
 import { QueueItem } from '../../services/queue.service';
 import { memo } from '../../utility';
@@ -15,8 +15,9 @@ import { ImageDialogComponent } from '../image-dialog/image.dialog';
   styleUrls: ['./images.component.scss'],
   imports: [
     CommonModule,
-    IonicModule,
     CameraButtonComponent,
+    IonIcon,
+    IonNote,
   ],
 })
 export class ImagesComponent implements OnChanges {

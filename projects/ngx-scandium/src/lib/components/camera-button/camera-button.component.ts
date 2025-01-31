@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output, input } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
+import { IonButton, IonIcon } from '@ionic/angular/standalone';
 import { TranslateModule } from '@ngx-translate/core';
 import { FileUpload } from '../../models';
 import { CameraService } from '../../services/camera.service';
@@ -15,8 +15,9 @@ import { UploadService } from '../../services/upload.service';
   templateUrl: 'camera-button.component.html',
   imports: [
     CommonModule,
-    IonicModule,
     TranslateModule,
+    IonButton,
+    IonIcon,
   ],
 })
 export class CameraButtonComponent {

@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { CUSTOM_ELEMENTS_SCHEMA, Component, signal } from '@angular/core';
-import { IonicModule, IonicSlides, ModalController, NavParams } from '@ionic/angular';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, signal } from '@angular/core';
+import { IonButton, IonCol, IonContent, IonFooter, IonIcon, IonicSlides, IonRow, ModalController, NavParams } from '@ionic/angular/standalone';
 
 @Component({
   standalone: true,
@@ -8,10 +8,15 @@ import { IonicModule, IonicSlides, ModalController, NavParams } from '@ionic/ang
   templateUrl: 'image.dialog.html',
   styleUrls: ['image.dialog.scss'],
   imports: [
-    IonicModule,
-    CommonModule
+    CommonModule,
+    IonContent,
+    IonFooter,
+    IonRow,
+    IonCol,
+    IonButton,
+    IonIcon,
   ],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class ImageDialogComponent {
 
