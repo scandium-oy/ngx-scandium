@@ -15,10 +15,11 @@ export class TokenInterceptor implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     if (req.url.includes('/assets/i18n')
       || req.url.includes('avoindata.prh.fi')
+      || req.url.includes('ipv4.myexternalip.com/json')
       || (req.url.includes('/contractors/') && req.method === 'GET')
       || (req.url.includes('/clients/') && req.method === 'GET')
       || (req.url.includes('/users/invite') && req.method === 'POST')
-      || (req.url.includes('/signature/passcode') && req.method === 'POST')
+      || (req.url.includes('/signature/') && req.method === 'POST')
       || req.url.startsWith(mapHost)) {
       return next.handle(req);
     }
