@@ -5,6 +5,7 @@
 export * from './lib/components/camera-button/camera-button.component';
 export * from './lib/components/image-dialog/image.dialog';
 export * from './lib/components/images/images.component';
+export * from './lib/components/loading-button/loading-button.component';
 export * from './lib/components/loading/loading.component';
 export * from './lib/components/logo/logo.component';
 export * from './lib/components/select-dialog/select.dialog';
