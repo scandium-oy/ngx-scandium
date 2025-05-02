@@ -13,9 +13,15 @@ export class UploadService {
     private firestore: FirestoreService,
   ) { }
 
-  uploadImage(file: FileUpload, isPrivate = false) {
+  async uploadImage(file: FileUpload, isPrivate = false) {
     const authUser = this.authService.getCurrentUser();
     const path = `${isPrivate ? 'private' : 'public'}/${authUser?.uid}/${file.guid}`;
     return this.firestore.pushFileToStorage(file, path);
+  }
+
+  async uploadFile(file: FileUpload, tmp = false) {
+    const authUser = this.authService.getCurrentUser();
+    const path = tmp ? `tmp/${file.guid}` : `${authUser?.uid}/${file.guid}`;
+    return this.firestore.pushFileToStorageRef(file, path);
   }
 }

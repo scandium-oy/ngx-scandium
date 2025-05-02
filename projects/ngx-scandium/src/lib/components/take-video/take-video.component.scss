@@ -1,0 +1,43 @@
+:host {
+  display: block;
+
+  ion-button {
+    height: var(--camera-button-height, 36px);
+    color: var(--camera-color, inherit);
+    background: var(--camera-background, inherit);
+    border: var(--camera-border);
+    border-radius: var(--camera-border-radius);
+  }
+
+  .multiline {
+    display: flex;
+    flex-direction: column;
+    gap: var(--camera-gap, 0.5em);
+    justify-content: center;
+    align-items: center;
+
+    ion-icon {
+      font-size: var(--camera-icon-size);
+    }
+  }
+}
+
+input[type='file'] {
+  display: none;
+}
+
+form {
+  width: 100%;
+}
+
+label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
+  cursor: pointer;
+
+  ion-icon {
+    font-size: xx-large;
+  }
+}

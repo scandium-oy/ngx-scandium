@@ -9,6 +9,7 @@ export * from './lib/components/loading-button/loading-button.component';
 export * from './lib/components/loading/loading.component';
 export * from './lib/components/logo/logo.component';
 export * from './lib/components/select-dialog/select.dialog';
+export * from './lib/components/take-video/take-video.component';
 export * from './lib/directives/format-number/format-number.directive';
 export * from './lib/directives/round-number/round-number.directive';
 export * from './lib/interceptors/http.interceptor';

@@ -1,0 +1,52 @@
+<form method="post"
+  enctype="multipart/form-data"
+  class="input-form">
+  <input #videoInput
+    type="file"
+    name="file"
+    accept="video/*"
+    capture="environment"
+    (change)="selectFiles($event)" />
+  @if (item()) {
+  <ion-item button="true"
+    [color]="color()"
+    [disabled]="disabled()"
+    lines="none"
+    (click)="videoInput.click()">
+    <ion-icon slot="start"
+      name="videocam"></ion-icon>
+    <div class="ion-margin-bottom">
+      <h4>{{ title() }}</h4>
+      <ion-note>
+        {{ description() }}
+      </ion-note>
+    </div>
+  </ion-item>
+  } @else {
+  <ion-button [color]="color()"
+    [disabled]="disabled()"
+    [fill]="fill()"
+    [expand]="expand()"
+    [shape]="shape()"
+    (click)="videoInput.click()">
+    @if (multiline()) {
+    <div class="multiline">
+      <ion-icon name="videocam"></ion-icon>
+      @if (!hideText()) {
+      <span>
+        {{ title() | translate }}
+      </span>
+      }
+    </div>
+    } @else {
+    <ion-icon slot="start"
+      name="videocam"></ion-icon>
+    @if (!hideText()) {
+    <span>
+      {{ title() | translate }}
+    </span>
+    }
+    }
+  </ion-button>
+  }
+</form>
