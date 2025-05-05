@@ -34,6 +34,7 @@ export class TakeVideoComponent {
   hideText = input(false);
   returnRef = input(false);
   item = input(false);
+  icon = input('videocam');
 
   imageUrl = output<string>();
   reference = output<StorageReference>();

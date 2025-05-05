@@ -14,7 +14,7 @@
     lines="none"
     (click)="videoInput.click()">
     <ion-icon slot="start"
-      name="videocam"></ion-icon>
+      [name]="icon()"></ion-icon>
     <div class="ion-margin-bottom">
       <h4>{{ title() }}</h4>
       <ion-note>
@@ -31,7 +31,7 @@
     (click)="videoInput.click()">
     @if (multiline()) {
     <div class="multiline">
-      <ion-icon name="videocam"></ion-icon>
+      <ion-icon [name]="icon()"></ion-icon>
       @if (!hideText()) {
       <span>
         {{ title() | translate }}
@@ -40,7 +40,7 @@
     </div>
     } @else {
     <ion-icon slot="start"
-      name="videocam"></ion-icon>
+      [name]="icon()"></ion-icon>
     @if (!hideText()) {
     <span>
       {{ title() | translate }}
