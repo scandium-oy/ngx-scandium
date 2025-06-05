@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, CUSTOM_ELEMENTS_SCHEMA, signal } from '@angular/core';
 import { IonButton, IonCol, IonContent, IonFooter, IonIcon, IonicSlides, IonRow, ModalController, NavParams } from '@ionic/angular/standalone';
 
@@ -8,14 +8,13 @@ import { IonButton, IonCol, IonContent, IonFooter, IonIcon, IonicSlides, IonRow,
   templateUrl: 'image.dialog.html',
   styleUrls: ['image.dialog.scss'],
   imports: [
-    CommonModule,
     IonContent,
     IonFooter,
     IonRow,
     IonCol,
     IonButton,
-    IonIcon,
-  ],
+    IonIcon
+],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class ImageDialogComponent {
