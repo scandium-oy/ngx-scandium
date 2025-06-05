@@ -23,6 +23,7 @@ export * from './lib/services/firestore.service';
 export * from './lib/services/geocode.service';
 export * from './lib/services/loading.service';
 export * from './lib/services/navigation.interface.service';
+export * from './lib/services/queue.service';
 export * from './lib/services/storage.service';
 export * from './lib/services/upload.service';
 export * from './lib/utility';
