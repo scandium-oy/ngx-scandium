@@ -64,7 +64,7 @@ export class FirestoreService {
 
   saveAs<T extends FirestoreItem>(collectionKey: string, guid: string, item: T, converter: any = null) {
     const docRef = doc(this.firestore, collectionKey, guid).withConverter(converter);
-    return setDoc(docRef, item);
+    return setDoc(docRef, item, { merge: true });
   }
 
   save<T extends FirestoreItem>(collectionKey: string, item: T, converter: any = null): Promise<DocumentReference<DocumentData, DocumentData>> {
