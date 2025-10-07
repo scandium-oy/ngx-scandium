@@ -37,6 +37,7 @@ export class QueueService {
   update$ = new ReplaySubject<void>(1);
 
   private queue: QueueItem<any>[] = [];
+  queueLength = signal(this.queue.length);
 
   constructor() {
     combineLatest([this.online$, this.update$.asObservable()]).pipe(
@@ -45,6 +46,7 @@ export class QueueService {
     ).subscribe(async () => {
       while (this.queue.length > 0) {
         const queueItem = this.queue.pop();
+        this.queueLength.set(this.queue.length);
         switch (queueItem?.type) {
           case QueueTypes.image:
             const imageUrl = await this.uploadImage(queueItem.item);
@@ -79,6 +81,7 @@ export class QueueService {
   addToQueue<T>(value: QueueItem<T>, cb: (imageUrl: string) => void) {
     value.cb = cb;
     this.queue.push(value);
+    this.queueLength.set(this.queue.length);
     console.info('Queued', value.item);
     this.update$.next();
     return value;
