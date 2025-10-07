@@ -1,24 +1,24 @@
-<ion-button [color]="color"
+<ion-button [color]="color()"
   [disabled]="disabled()"
-  [fill]="fill"
-  [expand]="expand"
-  [shape]="shape"
+  [fill]="fill()"
+  [expand]="expand()"
+  [shape]="shape()"
   (click)="onCamera()">
-  @if (multiline) {
+  @if (multiline()) {
   <div class="multiline">
     <ion-icon name="camera-outline"></ion-icon>
-    @if (!hideText) {
+    @if (!hideText()) {
     <span>
-      {{ title | translate }}
+      {{ title() | translate }}
     </span>
     }
   </div>
   } @else {
   <ion-icon slot="start"
     name="camera-outline"></ion-icon>
-  @if (!hideText) {
+  @if (!hideText()) {
   <span>
-    {{ title | translate }}
+    {{ title() | translate }}
   </span>
   }
   }

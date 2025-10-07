@@ -1,7 +1,7 @@
-import { Injectable, signal } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { fromEvent, merge, of } from 'rxjs';
-import { map, shareReplay, tap } from 'rxjs/operators';
+import { combineLatest, fromEvent, merge, of, ReplaySubject } from 'rxjs';
+import { debounceTime, map, shareReplay, tap } from 'rxjs/operators';
 import { FileUpload } from '../models';
 import { UploadService } from './upload.service';
 
@@ -13,12 +13,14 @@ export interface QueueItem<T> {
 
 export enum QueueTypes {
   image = 'image',
+  video = 'video',
 };
 
 @Injectable({
   providedIn: 'root',
 })
 export class QueueService {
+  private uploadService = inject(UploadService);
 
   isOnline = signal(true);
 
@@ -32,12 +34,13 @@ export class QueueService {
     shareReplay(1),
   );
 
+  update$ = new ReplaySubject<void>(1);
+
   private queue: QueueItem<any>[] = [];
 
-  constructor(
-    private uploadService: UploadService,
-  ) {
-    this.online$.pipe(
+  constructor() {
+    combineLatest([this.online$, this.update$.asObservable()]).pipe(
+      debounceTime(200),
       takeUntilDestroyed(),
     ).subscribe(async () => {
       while (this.queue.length > 0) {
@@ -49,6 +52,12 @@ export class QueueService {
               queueItem.cb(imageUrl);
             }
             break;
+          case QueueTypes.video:
+            const videoUrl = await this.uploadImage(queueItem.item);
+            if (queueItem.cb) {
+              queueItem.cb(videoUrl);
+            }
+            break;
           default:
             console.warn('Unknown type', queueItem?.type);
             break;
@@ -57,17 +66,21 @@ export class QueueService {
     });
   }
 
-  private uploadImage(fileupload: FileUpload) {
+  private async uploadImage(fileupload: FileUpload) {
     console.info('Uploading queued item', fileupload.guid);
-    return this.uploadService.uploadImage(fileupload).then((downloadUrl) => {
-      return downloadUrl;
-    });
+    const downloadUrl = await this.uploadService.uploadImage(fileupload);
+    return downloadUrl;
+  }
+
+  getQueue() {
+    return this.queue;
   }
 
   addToQueue<T>(value: QueueItem<T>, cb: (imageUrl: string) => void) {
     value.cb = cb;
     this.queue.push(value);
     console.info('Queued', value.item);
+    this.update$.next();
     return value;
   }
 }

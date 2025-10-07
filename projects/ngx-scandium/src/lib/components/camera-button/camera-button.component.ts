@@ -1,5 +1,5 @@
 
-import { Component, EventEmitter, Input, Output, input } from '@angular/core';
+import { Component, Input, input, output } from '@angular/core';
 import { IonButton, IonIcon } from '@ionic/angular/standalone';
 import { TranslateModule } from '@ngx-translate/core';
 import { FileUpload } from '../../models';
@@ -17,44 +17,26 @@ import { UploadService } from '../../services/upload.service';
     TranslateModule,
     IonButton,
     IonIcon
-],
+  ],
 })
 export class CameraButtonComponent {
 
-  @Input()
-  color = 'primary';
-
+  color = input('primary');
   disabled = input(false);
-
-  @Input()
-  name: string = '';
-
-  @Input()
-  title: string = 'item.addImage';
-
-  @Input()
-  fill = 'outline';
-
-  @Input()
-  expand = 'block';
-
-  @Input()
-  shape: string = '';
-
-  @Input()
-  multiline = false;
-
-  @Input()
-  hideText = false;
+  name = input('');
+  title = input('item.addImage');
+  fill = input('outline');
+  expand = input('block');
+  shape = input('');
+  multiline = input(false);
+  hideText = input(false);
+  queue = input(false);
 
   @Input()
   cb?: (imageUrl: string) => void;
 
-  @Output()
-  imageUrl = new EventEmitter<string>();
-
-  @Output()
-  queueItem = new EventEmitter<QueueItem<FileUpload>>();
+  imageUrl = output<string>();
+  queueItem = output<QueueItem<FileUpload>>();
 
   constructor(
     private cameraService: CameraService,
@@ -64,9 +46,9 @@ export class CameraButtonComponent {
   ) { }
 
   private async saveImage(imageFile: File) {
-    const guid = this.name + '-' + new Date().toISOString();
+    const guid = this.name() + '-' + new Date().toISOString();
     const fileupload = new FileUpload(guid, imageFile);
-    if (this.queueService.isOnline()) {
+    if (!this.queue() && this.queueService.isOnline()) {
       this.loadingService.showLoading(5000);
       this.uploadService.uploadImage(fileupload).then((downloadUrl) => {
         this.loadingService.hideLoading();
@@ -85,7 +67,7 @@ export class CameraButtonComponent {
   }
 
   onCamera(): void {
-    this.cameraService.openCamera(this.name).then((file) => {
+    this.cameraService.openCamera(this.name()).then((file) => {
       if (file) {
         this.saveImage(file);
       }
