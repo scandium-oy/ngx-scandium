@@ -8,6 +8,7 @@ import { UploadService } from './upload.service';
 export interface QueueItem<T> {
   type: QueueTypes;
   item: T;
+  status?: 'waiting' | 'uploading';
   cb?: (imageUrl: string) => void;
 }
 
@@ -38,6 +39,7 @@ export class QueueService {
 
   private queue: QueueItem<any>[] = [];
   queueS = signal(this.queue);
+  queueLength = signal(0);
 
   constructor() {
     combineLatest([this.online$, this.update$.asObservable()]).pipe(
@@ -45,7 +47,14 @@ export class QueueService {
       takeUntilDestroyed(),
     ).subscribe(async () => {
       while (this.queue.length > 0) {
-        const queueItem = this.queue.pop();
+        const queueItem = this.queue.pop()!;
+        queueItem.status = 'uploading';
+        this.queueS.update((val) => val.map((it) => {
+          if (it.item.guid === queueItem.item.guid) {
+            it.status = 'uploading';
+          }
+          return it;
+        }));
         switch (queueItem?.type) {
           case QueueTypes.image:
             const imageUrl = await this.uploadImage(queueItem.item);
@@ -70,7 +79,8 @@ export class QueueService {
   private async uploadImage(fileupload: FileUpload) {
     console.info('Uploading queued item', fileupload.guid);
     const downloadUrl = await this.uploadService.uploadImage(fileupload);
-    this.queueS.set(this.queue);
+    this.queueS.update((val) => val.filter((it) => it.item.guid !== fileupload.guid));
+    this.queueLength.set(this.queue.length);
     return downloadUrl;
   }
 
@@ -80,8 +90,10 @@ export class QueueService {
 
   addToQueue<T>(value: QueueItem<T>, cb: (imageUrl: string) => void) {
     value.cb = cb;
+    value.status = 'waiting';
     this.queue.push(value);
-    this.queueS.set(this.queue);
+    this.queueS.update((val) => [...val, value]);
+    this.queueLength.set(this.queue.length);
     console.info('Queued', value.item);
     this.update$.next();
     return value;
