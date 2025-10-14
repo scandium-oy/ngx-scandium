@@ -1,6 +1,7 @@
 import { Injectable, computed, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
+  ActionCodeSettings,
   Auth,
   AuthCredential,
   AuthProvider,
@@ -8,8 +9,12 @@ import {
   User, UserCredential,
   createUserWithEmailAndPassword,
   fetchSignInMethodsForEmail,
+  isSignInWithEmailLink,
   sendPasswordResetEmail,
-  signInWithCredential, signInWithPopup, updatePassword, updateProfile, user
+  sendSignInLinkToEmail,
+  signInWithCredential,
+  signInWithEmailLink,
+  signInWithPopup, updatePassword, updateProfile, user,
 } from '@angular/fire/auth';
 import { Observable } from 'rxjs';
 import { INavigationService } from './navigation.interface.service';
@@ -81,6 +86,18 @@ export class AuthService {
 
   public signInWithPopup(provider: AuthProvider): Promise<UserCredential> {
     return signInWithPopup(this.auth, provider);
+  }
+
+  sendSignInLinkToEmail(email: string, actionCodeSettings: ActionCodeSettings) {
+    return sendSignInLinkToEmail(this.auth, email, actionCodeSettings);
+  }
+
+  isSignInWithEmailLink() {
+    return isSignInWithEmailLink(this.auth, window.location.href);
+  }
+
+  signInWithEmailLink(email: string) {
+    return signInWithEmailLink(this.auth, email, window.location.href);
   }
 
   public checkIfEmailExists(email: string) {
