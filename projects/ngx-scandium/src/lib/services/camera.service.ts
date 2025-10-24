@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Camera, CameraResultType, Photo } from '@capacitor/camera';
+import { Camera, CameraResultType, GalleryPhoto, Photo } from '@capacitor/camera';
 import { Filesystem } from '@capacitor/filesystem';
 import { LoadingController, Platform } from '@ionic/angular/standalone';
 import { TranslateService } from '@ngx-translate/core';
@@ -15,14 +15,14 @@ export class CameraService {
     private translate: TranslateService,
   ) { }
 
-  private async saveImage(photo: Photo, filename: string): Promise<File> {
+  private async saveImage(photo: Photo | GalleryPhoto, filename: string): Promise<File> {
     const blob = await this.readAsBlob(photo);
 
     const file = this.readAsFile(blob, filename);
     return file;
   }
 
-  private async readAsBlob(photo: Photo) {
+  private async readAsBlob(photo: Photo | GalleryPhoto) {
     if (this.platform.is('hybrid')) {
       if (photo.path == null) {
         throw Error('Photo path is null,' + photo.path);
@@ -58,6 +58,26 @@ export class CameraService {
       type: blob.type,
     });
     return file;
+  }
+
+  async pickImages() {
+    const images = await Camera.pickImages({});
+    const loading = await this.loadingCtrl.create({
+      message: this.translate.instant('general.wait'),
+      spinner: 'crescent',
+    });
+    loading.present();
+    const files = [];
+    for (const image of images.photos) {
+      const suffix =
+        image.webPath?.substring(image.webPath.lastIndexOf('/') + 1) +
+        '.' +
+        image.format;
+      const file = await this.saveImage(image, image.webPath + '_' + suffix);
+      files.push(file);
+    }
+    loading.dismiss();
+    return files;
   }
 
   async openCamera(filename: string): Promise<File | undefined> {
