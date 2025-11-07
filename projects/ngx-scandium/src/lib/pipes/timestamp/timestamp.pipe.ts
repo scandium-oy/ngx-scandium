@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { FieldValue, Timestamp } from '@angular/fire/firestore';
-import { format } from 'date-fns';
+import { format, parse } from 'date-fns';
 import { isDate } from 'date-fns/isDate';
 
 const isTimestamp = (object: any): object is Timestamp => {
@@ -21,6 +21,10 @@ export class TimestampPipe implements PipeTransform {
       return '';
     }
     if (typeof value === 'string') {
+      if (value.includes('.') && !value.includes('T')) {
+        const formatted = parse(value, 'd.M.yyyy', new Date());
+        return format(formatted, outFormat);
+      }
       const date = new Date(value);
       return format(date, outFormat);
     }
