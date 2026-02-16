@@ -9,6 +9,7 @@ export interface QueueItem<T> {
   type: QueueTypes;
   item: T;
   status?: 'waiting' | 'uploading';
+  returnRef?: boolean;
   cb?: (imageUrl: string) => void;
 }
 
@@ -57,13 +58,13 @@ export class QueueService {
         }));
         switch (queueItem?.type) {
           case QueueTypes.image:
-            const imageUrl = await this.uploadImage(queueItem.item);
+            const imageUrl = await this.uploadImage(queueItem.item, queueItem.returnRef);
             if (queueItem.cb) {
               queueItem.cb(imageUrl);
             }
             break;
           case QueueTypes.video:
-            const videoUrl = await this.uploadImage(queueItem.item);
+            const videoUrl = await this.uploadImage(queueItem.item, queueItem.returnRef);
             if (queueItem.cb) {
               queueItem.cb(videoUrl);
             }
@@ -76,12 +77,19 @@ export class QueueService {
     });
   }
 
-  private async uploadImage(fileupload: FileUpload) {
+  private async uploadImage(fileupload: FileUpload, returnRef = false) {
     console.info('Uploading queued item', fileupload.guid);
-    const downloadUrl = await this.uploadService.uploadImage(fileupload);
-    this.queueS.update((val) => val.filter((it) => it.item.guid !== fileupload.guid));
-    this.queueLength.set(this.queue.length);
-    return downloadUrl;
+    if (returnRef) {
+      const downloadUrl = await this.uploadService.uploadFile(fileupload);
+      this.queueS.update((val) => val.filter((it) => it.item.guid !== fileupload.guid));
+      this.queueLength.set(this.queue.length);
+      return downloadUrl.fullPath;
+    } else {
+      const downloadUrl = await this.uploadService.uploadImage(fileupload);
+      this.queueS.update((val) => val.filter((it) => it.item.guid !== fileupload.guid));
+      this.queueLength.set(this.queue.length);
+      return downloadUrl;
+    }
   }
 
   getQueue() {
