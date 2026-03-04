@@ -17,6 +17,7 @@ export class TokenInterceptor implements HttpInterceptor {
       || req.url.includes('avoindata.prh.fi')
       || req.url.includes('ipv4.myexternalip.com/json')
       || (req.url.includes('/contractors/') && req.method === 'GET')
+      || (req.url.includes('/openai/details/') && req.method === 'GET')
       || (req.url.includes('/clients/') && req.method === 'GET')
       || (req.url.includes('/users/invite') && req.method === 'POST')
       || (req.url.includes('/signature/') && req.method === 'POST')
