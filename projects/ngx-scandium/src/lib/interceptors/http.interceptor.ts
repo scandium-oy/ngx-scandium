@@ -5,6 +5,8 @@ import { filter, switchMap } from 'rxjs/operators';
 import { AuthService } from '../services/auth.service';
 import { mapHost } from '../services/geocode.service';
 
+const weatherApi = 'https://weather.googleapis.com/';
+
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
 
@@ -19,6 +21,7 @@ export class TokenInterceptor implements HttpInterceptor {
       || (req.url.includes('/contractors/') && req.method === 'GET')
       || (req.url.includes('/openai/details/') && req.method === 'GET')
       || (req.url.includes('/clients/') && req.method === 'GET')
+      || (req.url.startsWith(weatherApi) && req.method === 'GET')
       || (req.url.includes('/users/invite') && req.method === 'POST')
       || (req.url.includes('/signature/') && req.method === 'POST')
       || req.url.startsWith(mapHost)) {
