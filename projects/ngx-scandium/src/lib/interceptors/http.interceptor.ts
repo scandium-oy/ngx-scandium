@@ -24,6 +24,7 @@ export class TokenInterceptor implements HttpInterceptor {
       || (req.url.startsWith(weatherApi) && req.method === 'GET')
       || (req.url.includes('/users/invite') && req.method === 'POST')
       || (req.url.includes('/signature/') && req.method === 'POST')
+      || (req.url.includes('/site-signup') && req.method === 'POST')
       || req.url.startsWith(mapHost)) {
       return next.handle(req);
     }
