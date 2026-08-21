@@ -1,5 +1,5 @@
 
-import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, signal } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, signal, ChangeDetectionStrategy } from '@angular/core';
 import { IonIcon, IonNote, ModalController } from '@ionic/angular/standalone';
 import { FileUpload } from '../../models';
 import { QueueItem } from '../../services/queue.service';
@@ -13,6 +13,7 @@ import { ImageDialogComponent } from '../image-dialog/image.dialog';
   selector: 'app-images',
   templateUrl: 'images.component.html',
   styleUrls: ['./images.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [
     CameraButtonComponent,
     IonIcon,

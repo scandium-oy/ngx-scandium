@@ -1,5 +1,5 @@
 
-import { Component, input, output } from '@angular/core';
+import { Component, input, output, ChangeDetectionStrategy } from '@angular/core';
 import { StorageReference } from '@angular/fire/storage';
 import { Dialog } from '@capacitor/dialog';
 import { IonButton, IonIcon, IonItem, IonNote } from "@ionic/angular/standalone";
@@ -12,6 +12,7 @@ import { UploadService } from '../../services/upload.service';
   selector: 'app-take-video',
   templateUrl: './take-video.component.html',
   styleUrls: ['./take-video.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [IonItem, IonIcon, IonButton, IonNote, TranslateModule],
 })
 export class TakeVideoComponent {

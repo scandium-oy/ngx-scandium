@@ -1,5 +1,5 @@
 
-import { Component, CUSTOM_ELEMENTS_SCHEMA, signal } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, signal, ChangeDetectionStrategy } from '@angular/core';
 import { IonButton, IonCol, IonContent, IonFooter, IonIcon, IonicSlides, IonRow, ModalController, NavParams } from '@ionic/angular/standalone';
 
 @Component({
@@ -15,6 +15,7 @@ import { IonButton, IonCol, IonContent, IonFooter, IonIcon, IonicSlides, IonRow,
     IonButton,
     IonIcon
 ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class ImageDialogComponent {

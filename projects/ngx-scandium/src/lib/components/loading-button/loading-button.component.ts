@@ -1,4 +1,4 @@
-import { Component, Input, signal } from '@angular/core';
+import { Component, Input, signal, ChangeDetectionStrategy } from '@angular/core';
 import { IonIcon, IonSpinner } from '@ionic/angular/standalone';
 
 @Component({
@@ -12,6 +12,7 @@ import { IonIcon, IonSpinner } from '@ionic/angular/standalone';
     <ng-content></ng-content>
   }
   `,
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [
     IonSpinner,
     IonIcon,

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { IonButton, IonButtons, IonContent, IonHeader, IonIcon, IonItem, IonSearchbar, IonTitle, IonToolbar, ModalController, NavParams } from '@ionic/angular/standalone';
 import { TranslateModule } from '@ngx-translate/core';
 import { BehaviorSubject, combineLatest, map, shareReplay } from 'rxjs';
@@ -15,6 +15,7 @@ export interface SelectItem {
   selector: 'app-select-dialog',
   templateUrl: './select.dialog.html',
   styleUrls: ['select.dialog.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [IonButton,
     CommonModule,
     TranslateModule,
