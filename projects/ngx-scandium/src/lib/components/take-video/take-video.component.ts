@@ -3,7 +3,7 @@ import { Component, input, output, ChangeDetectionStrategy } from '@angular/core
 import { StorageReference } from '@angular/fire/storage';
 import { Dialog } from '@capacitor/dialog';
 import { IonButton, IonIcon, IonItem, IonNote } from "@ionic/angular/standalone";
-import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { FileUpload } from '../../models';
 import { LoadingService } from '../../services/loading.service';
 import { UploadService } from '../../services/upload.service';
@@ -13,7 +13,7 @@ import { UploadService } from '../../services/upload.service';
   templateUrl: './take-video.component.html',
   styleUrls: ['./take-video.component.scss'],
   changeDetection: ChangeDetectionStrategy.Eager,
-  imports: [IonItem, IonIcon, IonButton, IonNote, TranslateModule],
+  imports: [IonItem, IonIcon, IonButton, IonNote, TranslatePipe],
 })
 export class TakeVideoComponent {
 

@@ -1,7 +1,7 @@
 
 import { Component, Input, input, output, ChangeDetectionStrategy } from '@angular/core';
 import { IonButton, IonIcon } from '@ionic/angular/standalone';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import { FileUpload } from '../../models';
 import { CameraService } from '../../services/camera.service';
 import { LoadingService } from '../../services/loading.service';
@@ -15,7 +15,7 @@ import { UploadService } from '../../services/upload.service';
   templateUrl: 'camera-button.component.html',
   changeDetection: ChangeDetectionStrategy.Eager,
   imports: [
-    TranslateModule,
+    TranslatePipe,
     IonButton,
     IonIcon
   ],

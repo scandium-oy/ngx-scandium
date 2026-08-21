@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { IonButton, IonButtons, IonContent, IonHeader, IonIcon, IonItem, IonSearchbar, IonTitle, IonToolbar, ModalController, NavParams } from '@ionic/angular/standalone';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import { BehaviorSubject, combineLatest, map, shareReplay } from 'rxjs';
 
 export interface SelectItem {
@@ -18,7 +18,7 @@ export interface SelectItem {
   changeDetection: ChangeDetectionStrategy.Eager,
   imports: [IonButton,
     CommonModule,
-    TranslateModule,
+    TranslatePipe,
     IonHeader,
     IonToolbar,
     IonTitle,
