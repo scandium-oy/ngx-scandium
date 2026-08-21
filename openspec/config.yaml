@@ -1,32 +1,59 @@
 schema: spec-driven
 
-# Project context (optional)
-# This is shown to AI when creating artifacts.
-# Add your tech stack, conventions, style guides, domain knowledge, etc.
-# Example:
-#   context: |
-#     Tech stack: TypeScript, React, Node.js
-#     We use conventional commits
-#     Domain: e-commerce platform
+context: |
+  This repository is an Angular workspace that publishes the reusable
+  @scandium-oy/ngx-scandium npm library. It is a library rather than an
+  end-user application, so preserve consumer compatibility and treat exported
+  APIs, selectors, inputs, outputs, dependency-injection contracts, and peer
+  dependency ranges as public contracts.
 
-# Per-artifact rules (optional)
-# Add custom rules for specific artifacts.
-# Example:
-#   rules:
-#     proposal:
-#       - Keep proposals under 500 words
-#       - Always include a "Non-goals" section
-#     tasks:
-#       - Break tasks into chunks of max 2 hours
+  The library targets Angular 21 and Ionic 8. It uses TypeScript 5.9, RxJS 7,
+  standalone Angular components, Angular signals, and strict TypeScript and
+  Angular template compilation. Integrations include AngularFire/Firebase,
+  Capacitor device APIs, Ionic Storage, ngx-translate, date-fns, and Swiper.
 
-# Per-operation guidance (optional)
-# Add advisory guidance for how apply and archive work should be conducted.
-# This is separate from artifact rules above.
-# Example:
-#   operations:
-#     apply:
-#       guidance:
-#         - Keep test summaries concise
-#     archive:
-#       guidance:
-#         - Summarize the archive outcome before finishing
+  Source lives in projects/ngx-scandium/src/lib and is organized into
+  components, directives, interceptors, models, pipes, services, and utility
+  modules. The supported package surface is re-exported by
+  projects/ngx-scandium/src/public-api.ts. Package metadata and consumer peer
+  requirements live in projects/ngx-scandium/package.json; workspace tooling
+  and build targets live in the root package.json and angular.json.
+
+  Preserve the existing strict compiler settings, standalone-component style,
+  dependency-injection patterns, and focused feature-directory layout. Avoid
+  adding dependencies when an existing platform or library capability is
+  sufficient.
+
+  Build the production library with `npm run build`. Jasmine/Karma test
+  infrastructure is configured through `npm test`, but the repository
+  currently contains no `*.spec.ts` files. Add focused tests for changed
+  behavior where practical and do not claim test coverage that was not run.
+
+rules:
+  proposal:
+    - Describe the consumer-visible value and identify affected public exports or integrations.
+    - Explicitly label breaking changes and include migration impact; otherwise state how compatibility is preserved.
+    - Include concrete non-goals to prevent unrelated library cleanup from entering the change.
+  specs:
+    - Express requirements as observable consumer behavior rather than internal implementation details.
+    - Give every requirement at least one Given/When/Then scenario, including relevant error or boundary behavior.
+    - Cover compatibility of existing public APIs when a change modifies an exported symbol or integration contract.
+  design:
+    - Identify affected source areas, public-api exports, peer dependencies, and downstream consumer implications.
+    - Explain Angular, Ionic, Firebase, or Capacitor compatibility decisions and alternatives when relevant.
+    - Keep implementation consistent with strict typing, strict templates, standalone components, and existing dependency-injection patterns.
+  tasks:
+    - Name concrete files or source areas and order tasks by implementation dependency.
+    - Keep each checkbox independently verifiable and include focused tests for changed behavior where practical.
+    - Finish with production library build verification and any relevant non-interactive test command.
+
+operations:
+  apply:
+    guidance:
+      - Keep edits scoped to the approved change and preserve the published package's backward compatibility unless the proposal explicitly declares a breaking change.
+      - Run focused tests for changed behavior where available and always run `npm run build` for source or package changes.
+      - Report exactly which verification commands ran and distinguish passing checks from checks that were unavailable or not applicable.
+  archive:
+    guidance:
+      - Summarize public API, peer-dependency, and consumer migration impact before finishing.
+      - Record the final build and test results concisely.
